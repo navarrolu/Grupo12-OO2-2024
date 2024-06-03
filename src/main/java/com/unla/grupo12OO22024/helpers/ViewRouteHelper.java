@@ -4,6 +4,7 @@ public class ViewRouteHelper {
     // HOME
     public final static String INDEX = "home/index";
     public final static String HELLO = "home/hello";
+    public final static String LOGIN = "home/login";
 
     // DEGREE
 	public final static String DEGREE_INDEX = "degree/index";
@@ -13,4 +14,5 @@ public class ViewRouteHelper {
     // REDIRECTS
     public final static String ROUTE_INDEX = "/index";
     public final static String DEGREE_ROOT = "/degrees/";
+    
 }

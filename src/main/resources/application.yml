@@ -1,8 +1,8 @@
 spring:
     datasource:
-        url: ${DB_URL}
-        username: ${USERNAME}
-        password: ${PASSWORD}
+        url: jdbc:mysql://localhost:3306/bd-prueba
+        username: root
+        password: root
     jpa:
         show-sql: true
         hibernate:
@@ -11,5 +11,4 @@ spring:
             dialect: org.hibernate.dialect.MySQL5Dialect
     thymeleaf:
         cache: false
-    application:
-        name: grupo-12-OO2-2024
+

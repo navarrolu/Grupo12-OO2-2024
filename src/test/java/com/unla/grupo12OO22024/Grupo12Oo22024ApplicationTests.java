@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class Grupo12Oo22024ApplicationTests {
 
 	@Test
-	void contextLoads() {
-	}
-
+	void contextLoads() {}
 }

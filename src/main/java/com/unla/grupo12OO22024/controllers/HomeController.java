@@ -37,5 +37,10 @@ public class HomeController {
     public RedirectView redirectToHomeIndex() {
         return new RedirectView(ViewRouteHelper.ROUTE_INDEX);
     }
+
+    @GetMapping("/login")
+    public String login(){
+        return ViewRouteHelper.LOGIN;
+    }
     
 }
