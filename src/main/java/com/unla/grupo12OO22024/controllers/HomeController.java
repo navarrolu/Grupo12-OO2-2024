@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 
@@ -34,14 +33,14 @@ public class HomeController {
             return mV;
     }
 
-    @GetMapping("/")
-    public RedirectView redirectToHomeIndex() {
-        return new RedirectView(ViewRouteHelper.ROUTE_INDEX);
-    }
-
-    @GetMapping("/login")
+   @GetMapping("/login")
     public String login(){
         return ViewRouteHelper.LOGIN;
+    }
+
+    @GetMapping("/login2")
+    public String login2(){
+        return ViewRouteHelper.LOGIN2;
     }
     
 }
