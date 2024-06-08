@@ -9,8 +9,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 
-
-
 @Controller
 @RequestMapping("/")
 public class HomeController {

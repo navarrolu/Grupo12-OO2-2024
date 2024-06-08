@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
 
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.models.DegreeModel;
@@ -31,11 +30,6 @@ public class DegreeController {
         return mV;
     }
 
-    @PostMapping("/")
-    public RedirectView create(@ModelAttribute("degree") DegreeModel degreeModel){
-        degreeService.insertOrUpdate(degreeModel);
-        return new RedirectView(ViewRouteHelper.DEGREE_ROOT);
-    }
 
     @GetMapping("/form")
 	public String degree(Model model) {
