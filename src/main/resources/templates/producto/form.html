@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>default</title>
+</head>
+<body>
+    <form action="#" th:action="@{new}" th:object="${producto}" method="post">
+        <p>descripcion : <input type="text" th:field="*{descripcion}" /> </p>
+        <p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"> descripcion error</p>
+        <p>precio_total : <input type="number" step="0.1" th:field="*{precio_total}" /> </p>
+        <p th:if="${#fields.hasErrors('precio_total')}" th:errors="*{precio_total}"> precio total error</p>
+        <p>stock : <input type="number" th:field="*{stock}" /> </p>
+        <p th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"> stock error</p>
+        <p>stock_minimo : <input type="number" th:field="*{stock_minimo}" /> </p>
+        <p th:if="${#fields.hasErrors('stock_minimo')}" th:errors="*{stock_minimo}"> stock minimo error</p>
+        <input type="submit" value="agregar">
+    </form>
+</body>
+</html>
