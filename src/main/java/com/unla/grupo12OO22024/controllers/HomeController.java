@@ -31,14 +31,5 @@ public class HomeController {
             return mV;
     }
 
-   @GetMapping("/login")
-    public String login(){
-        return ViewRouteHelper.LOGIN;
-    }
-
-    @GetMapping("/login2")
-    public String login2(){
-        return ViewRouteHelper.LOGIN2;
-    }
     
 }
