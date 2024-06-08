@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Institution</th>
+        <th>Year</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="producto : ${productos}">
+        <td><span th:text="${producto.descripcion}" /></td>
+        <td><span th:text="${producto.precio_total}" /></td>
+        <td><span th:text="${producto.stock}" /></td>
+        <td><span th:text="${producto.stock_minimo}" /></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
