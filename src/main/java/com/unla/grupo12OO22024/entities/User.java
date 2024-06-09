@@ -57,8 +57,8 @@ public class User {
         this.userRoles = userRoles;
     }
 
-    /*public User() {
-    }*/
+    public User() {
+    }
     
 
 

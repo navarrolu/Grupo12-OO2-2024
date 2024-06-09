@@ -39,7 +39,7 @@ public class UserRole {
     private LocalDateTime updatedAt;
 
 
-   /* public UserRole() {}*/
+    public UserRole() {}
 
     public UserRole(int id, User user, String role) {
         this.id = id;
