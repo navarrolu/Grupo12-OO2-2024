@@ -1,5 +1,7 @@
 package com.unla.grupo12OO22024.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User; //chequear linea 20
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,8 +15,11 @@ import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 @RequestMapping("/")
 public class HomeController {
     @GetMapping("/index")
-    public String index(){
-        return ViewRouteHelper.INDEX;
+    public ModelAndView index(){
+        ModelAndView modelAndView = new ModelAndView(ViewRouteHelper.INDEX);
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        modelAndView.addObject("username", user.getUsername());
+        return modelAndView;
     }
 
     @GetMapping("/hello")
@@ -30,6 +35,8 @@ public class HomeController {
             mV.addObject("name", name);
             return mV;
     }
+
+    
 
     
 }

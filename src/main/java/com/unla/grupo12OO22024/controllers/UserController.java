@@ -28,4 +28,9 @@ public class UserController {
     public String loginCheck() {
         return "redirect:/index";
     }
+
+    //dudo si la lib importada para authentication es la correcta
+
+
+
 }
