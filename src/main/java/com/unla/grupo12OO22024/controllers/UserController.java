@@ -9,6 +9,7 @@ import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 
 @Controller
 public class UserController {
+    
 
     @GetMapping("/login")
     public String login(Model model,
@@ -26,11 +27,10 @@ public class UserController {
 
     @GetMapping("/loginsuccess")
     public String loginCheck() {
-        return "redirect:home/index";
+        return "redirect:/index";
     }
 
-    //dudo si la lib importada para authentication es la correcta
-
+    //TODO: arreglar porblema de redireccionamiento de loginsuccess
 
 
 }

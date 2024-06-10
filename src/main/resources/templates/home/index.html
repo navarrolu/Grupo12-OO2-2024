@@ -1,11 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Index</title>
-</head>
-<body>
+<html lang="en">
+  <head>
+    <title>STOCK - Iniciar Sesión</title>
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="icon" href="../../assets/caja.ico"  type="image/x-icon">
+  
+  </head>
+  <body>
     <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
-    <!-- Resto de tu HTML -->
-</body>
+
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Cerrar Sesión</button>
+    </form>
+  </body>
 </html>

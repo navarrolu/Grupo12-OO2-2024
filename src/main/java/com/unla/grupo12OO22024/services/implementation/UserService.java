@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo12OO22024.entities.UserRole;
@@ -20,6 +21,7 @@ import com.unla.grupo12OO22024.repositories.IUserRepository;
 public class UserService implements UserDetailsService {
 
     private IUserRepository userRepository;
+	private BCryptPasswordEncoder passwordEncoder;
 
     public UserService(IUserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -45,4 +47,12 @@ public class UserService implements UserDetailsService {
 		return new ArrayList<>(grantedAuthorities);
 	}
 
+    public com.unla.grupo12OO22024.entities.User saveUser( com.unla.grupo12OO22024.entities.User user ) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setEnabled(true);  // Por defecto, habilitar el usuario
+        return userRepository.save(user);
+    }
+
+
+	
 }
