@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Pedido de Aprovisionamiento</title>
+	<style>
+		body {
+			font-family: cursive;
+			margin: 0;
+			padding: 20px;
+			background-color: #f4f4f9;
+			display: grid;
+			justify-content: center;
+			/* Centra horizontalmente */
+		}
+
+		.container {
+			max-width: 100px;
+			margin: auto;
+			background: white;
+			padding: 20px;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+		}
+
+		h1 {
+			text-align: center;
+			color: #333;
+		}
+
+		form {
+			display: flex;
+			flex-direction: column;
+		}
+
+		label {
+			margin: 10px 0 5px;
+			font-weight: bold;
+		}
+
+		input[type="text"],
+		input[type="number"],
+		input[type="date"],
+		textarea,
+		select {
+			padding: 10px;
+			margin-bottom: 20px;
+			border: 1px solid #ddd;
+			border-radius: 5px;
+			width: 100%;
+			box-sizing: border-box;
+		}
+
+		textarea {
+			resize: vertical;
+			height: 50px;
+		}
+
+		button {
+			padding: 15px;
+			background-color: rgb(128, 0, 255);
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			font-size: 16px;
+		}
+
+		button:hover {
+			background-color: rgb(128, 0, 255);
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Pedido de Aprovisionamiento</h1>
+	<form th:action="@{/pedido/create}" th:object="${pedido}" method="post">
+		<div>
+			<label for="proveedor">Proveedor:</label>
+			<input type="text" id="proveedor" th:field="*{proveedor}" />
+		</div>
+		<div>
+			<label for="producto">Producto:</label>
+			<input type="text" id="producto" th:field="*{producto}" />
+		</div>
+		<div>
+			<label for="cantidad">Cantidad:</label>
+			<input type="number" id="cantidad" th:field="*{cantidad}" />
+		</div>
+		<div>
+			<button type="submit">Enviar</button>
+		</div>
+	</form>
+	<form th:action="@{/pedido}" th:objetc"${pedido}" method="get">
+		<div>
+			<button type="menu">Volver</button>
+		</div>
+
+	</form>
+</body>
+
+</html>
