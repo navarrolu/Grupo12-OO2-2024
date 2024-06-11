@@ -23,8 +23,8 @@
         </div>
         
         <div class="links">
-          <a href="#">No tienes una cuenta? Registrate!</a>
-        </div> 
+          <a th:href="@{/register}">No tienes una cuenta? Registrate!</a>
+      </div>
         <img src="./assets/images.png" alt="insertar logo" class="logo" />
         <div th:if="${error != null}" >
           Usuario o contraseña invalidos.
