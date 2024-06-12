@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo12OO22024.entities.UserRole;
@@ -28,9 +29,10 @@ public class UserService implements UserDetailsService {
 	private BCryptPasswordEncoder passwordEncoder;
 	private IUserRoleRepository userRoleRepository;
 
-    public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository) {
+    public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
 		this.userRepository = userRepository;
 		this.userRoleRepository = userRoleRepository;
+		this.passwordEncoder = passwordEncoder;
 	}
 
     @Override
