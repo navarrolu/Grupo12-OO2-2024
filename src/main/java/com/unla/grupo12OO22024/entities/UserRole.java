@@ -15,13 +15,21 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
+
+
 @Entity
 @Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "user_id"}))
 public class UserRole {
 
+    public enum Role {
+        ROLE_USER,
+        ROLE_ADMIN
+    }
+    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -47,11 +55,11 @@ public class UserRole {
         this.role = role;
     }
 
-    public int getId() {
+    public long getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

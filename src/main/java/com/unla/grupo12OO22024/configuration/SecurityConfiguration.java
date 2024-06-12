@@ -33,11 +33,10 @@ public class SecurityConfiguration {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/*", "/imgs/*", "/js/*", 
-							"/register/*","/register/*", "/resources/**", "/css/**", "/js/**").permitAll(); // Agregar "/register" aquí
+					auth.requestMatchers("/css/*", "/assets/*", "/js/*", "/register",
+							"/register/*", "/resources/**", "/css/**", "/js/**").permitAll(); // Agregar "/register" aquí
 					auth.anyRequest().authenticated();
 				})
-				
 				.formLogin(login -> {
 					login.loginPage("/login");
 					login.loginProcessingUrl("/loginprocess");
@@ -71,4 +70,6 @@ public class SecurityConfiguration {
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();
 	}
+
+	
 }

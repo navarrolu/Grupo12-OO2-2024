@@ -16,15 +16,21 @@ import org.springframework.stereotype.Service;
 
 import com.unla.grupo12OO22024.entities.UserRole;
 import com.unla.grupo12OO22024.repositories.IUserRepository;
+import com.unla.grupo12OO22024.repositories.IUserRoleRepository;
+
+import jakarta.transaction.Transactional;
+
 
 @Service ("userService")
 public class UserService implements UserDetailsService {
 
     private IUserRepository userRepository;
 	private BCryptPasswordEncoder passwordEncoder;
+	private IUserRoleRepository userRoleRepository;
 
-    public UserService(IUserRepository userRepository) {
+    public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository) {
 		this.userRepository = userRepository;
+		this.userRoleRepository = userRoleRepository;
 	}
 
     @Override
@@ -47,12 +53,28 @@ public class UserService implements UserDetailsService {
 		return new ArrayList<>(grantedAuthorities);
 	}
 
-    public com.unla.grupo12OO22024.entities.User saveUser( com.unla.grupo12OO22024.entities.User user ) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setEnabled(true);  // Por defecto, habilitar el usuario
+    /*public com.unla.grupo12OO22024.entities.User saveUser( com.unla.grupo12OO22024.entities.User user, String role) {
+        user.setPassword(user.getPassword());
+        user.setEnabled(true);  //habilitar el usuario
+		UserRole userRole = new UserRole();
+        userRole.setUser(user);
+        userRole.setRole(role);
+        userRoleRepository.save(userRole);
         return userRepository.save(user);
-    }
+    } //revisar*/
 
+	@Transactional
+    public void saveUserWithRole(com.unla.grupo12OO22024.entities.User user, String role) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+		//user.setPassword(user.getPassword());
+		user.setEnabled(true);
+        userRepository.save(user);
+
+        UserRole userRole = new UserRole();
+        userRole.setRole(role);
+        userRole.setUser(user);
+        userRoleRepository.save(userRole);
+    }
 
 	
 }
