@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -21,18 +22,18 @@ import com.unla.grupo12OO22024.repositories.IUserRoleRepository;
 
 import jakarta.transaction.Transactional;
 
-
+@ComponentScan
 @Service ("userService")
 public class UserService implements UserDetailsService {
 
-    private IUserRepository userRepository;
-	private BCryptPasswordEncoder passwordEncoder;
-	private IUserRoleRepository userRoleRepository;
+    private final IUserRepository userRepository;
+	private PasswordEncoder passwordEncoder;
+	private final IUserRoleRepository userRoleRepository;
 
-    public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(IUserRepository userRepository, IUserRoleRepository userRoleRepository) {
 		this.userRepository = userRepository;
 		this.userRoleRepository = userRoleRepository;
-		this.passwordEncoder = passwordEncoder;
+		this.passwordEncoder = new BCryptPasswordEncoder();
 	}
 
     @Override

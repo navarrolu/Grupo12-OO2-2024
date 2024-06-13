@@ -1,6 +1,7 @@
 package com.unla.grupo12OO22024.configuration;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -19,6 +20,7 @@ import com.unla.grupo12OO22024.services.implementation.UserService;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@ComponentScan
 public class SecurityConfiguration {
 
     private final UserService userService;
