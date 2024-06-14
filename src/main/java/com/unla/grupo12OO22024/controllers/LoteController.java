@@ -1,4 +1,4 @@
-package com.unla.grupo12OO22024.controllers;
+/*package com.unla.grupo12OO22024.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -53,3 +53,4 @@ public class LoteController {
 
 
 }
+*/
