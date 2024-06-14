@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
   <head>
-    <title>STOCK - Iniciar Sesión</title>
+    <title>STOCK - Control y Pedido</title>
     <link rel="stylesheet" href="./css/login.css" />
-    <link rel="icon" href="../../assets/caja.ico"  type="image/x-icon">
-  
+    <link rel="icon" href="./assets/caja.ico"  type="image/x-icon">
   </head>
   <body>
-    <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
-
-    <form th:action="@{/logout}" method="post">
+    <div class="container container-index">
+      <form th:action="@{/logout}" method="post">
+        <img src="./assets/caja.png" alt="insertar logo" class="logo" />
+        <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
+        <main>
+          <button onclick="location.href='/producto/nuevo'" class="btn btn-primary">Ingresar Nuevo Producto</button>
+          <button onclick="location.href='/producto/modif'" class="btn btn-primary">Modificar Producto</button>
+          <button onclick="location.href='/producto/baja'" class="btn btn-primary">Eliminar Producto</button>
+          <button onclick="location.href='/lotes/nuevo'" class="btn btn-primary">Ingresar Nuevo Lote de Mercancía</button>
+          <button onclick="location.href='/informes'" class="btn btn-primary">Vista de Informes</button>
+          <button onclick="location.href='/pedido'" class="btn btn-primary">Generar Pedido de Aprovisionamiento</button>
+        </main>
         <button type="submit">Cerrar Sesión</button>
-    </form>
+      </form>
+    </div>
   </body>
 </html>

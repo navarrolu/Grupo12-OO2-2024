@@ -17,6 +17,7 @@ body{
   background-color: white;
   position: relative;
 }
+
 .container::after {
   content: "";
   position: absolute;
@@ -31,6 +32,19 @@ body{
 .container form {
   width: 380px;
   height: 420px;
+  padding: 3rem 2rem;
+  background-color: white;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.241),
+    -5px -5px 10px rgba(153, 153, 153, 0.387);
+  border-radius: 35px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.container-index form {
+  width: 1200px;
+  height: 800px;
   padding: 3rem 2rem;
   background-color: white;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.241),

@@ -19,6 +19,10 @@ public class ViewRouteHelper {
 
     public final static String PRODUCTO_INDEX = "producto/index";
 
+    //LOTE
+    public final static String LOTE = "home/lotes";
+    public final static String LOTE_NUEVO = "home/nuevolote";
+
     // REDIRECTS
     public final static String ROUTE_INDEX = "/index";
     public final static String DEGREE_ROOT = "/degrees/";
