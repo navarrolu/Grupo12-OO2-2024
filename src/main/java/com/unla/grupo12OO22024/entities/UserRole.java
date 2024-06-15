@@ -18,7 +18,7 @@ import jakarta.persistence.UniqueConstraint;
 
 
 @Entity
-@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = {"role", "user_id"}))
+@Table(name = "user_role", uniqueConstraints = @UniqueConstraint(columnNames = { "role", "createdat", "updatedat", "id_usuario"}))
 public class UserRole {
 
     public enum Role {
@@ -31,9 +31,6 @@ public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @Column(name = "role", nullable = false, length = 100)
     private String role;
@@ -45,6 +42,10 @@ public class UserRole {
     @Column(name = "updatedat")
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_usuario", nullable = false)
+    private User user;
 
 
     public UserRole() {}
