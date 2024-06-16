@@ -24,20 +24,6 @@ CREATE TABLE `producto` (
 );
 /*---------------------- [Producto] -------------------------*/
 
-/*----------------------- [Pedido] --------------------------*/
-CREATE TABLE `pedido` (
-  `id_pedido` int NOT NULL AUTO_INCREMENT,
-  `id_producto` bigint NOT NULL,
-  `cantidad` int NOT NULL,
-  `fecha` date NOT NULL,
-  `proveedor` varchar(50) NOT NULL,
-  PRIMARY KEY (`id_pedido`),
-  KEY `fk_pedido_idx` (`id_producto`),
-  CONSTRAINT `fk_pedido` FOREIGN KEY (`id_producto`)
-  REFERENCES `producto` (`id_producto`) 
-);
-/*----------------------- [Pedido] --------------------------*/
-
 /*------------------------ [Lote] ---------------------------*/
 CREATE TABLE `lote` (
   `id_lote` int NOT NULL AUTO_INCREMENT,
@@ -72,5 +58,17 @@ CREATE TABLE `venta` (
 );
 /*------------------------ [Venta] --------------------------*/
 
-
+/*----------------------- [Pedido] --------------------------*/
+CREATE TABLE `pedido` (
+  `id_pedido` int NOT NULL AUTO_INCREMENT,
+  `id_producto` bigint NOT NULL,
+  `cantidad` int NOT NULL,
+  `fecha` date NOT NULL,
+  `proveedor` varchar(50) NOT NULL,
+  PRIMARY KEY (`id_pedido`),
+  KEY `fk_pedido_idx` (`id_producto`),
+  CONSTRAINT `fk_pedido` FOREIGN KEY (`id_producto`)
+  REFERENCES `producto` (`id_producto`) 
+);
+/*----------------------- [Pedido] --------------------------*/
 

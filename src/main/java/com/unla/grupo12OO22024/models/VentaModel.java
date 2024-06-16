@@ -15,26 +15,26 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class PedidoModel {
+public class VentaModel {
 
 	@Id
 	@Setter(AccessLevel.PROTECTED)
-	private int idPedido;
-
+	private long idVenta;
+	
 	private Producto producto;
-
+	
+	private int usuario;
+	
 	private int cantidad;
-
+	
 	private LocalDate fecha;
 
-	private String proveedor;
-
-	public PedidoModel(int idPedido, Producto producto, int cantidad, LocalDate fecha, String proveedor) {
-		this.idPedido = idPedido;
+	public VentaModel(long idVenta, Producto producto, int usuario, int cantidad, LocalDate fecha) {
+		this.idVenta= idVenta;
 		this.producto = producto;
+		this.usuario = usuario;
 		this.cantidad = cantidad;
 		this.fecha = fecha;
-		this.proveedor = proveedor;
 	}
 
 }

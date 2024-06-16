@@ -1,18 +1,27 @@
 package com.unla.grupo12OO22024.helpers;
 
 public class ViewRouteHelper {
-    // HOME
-    public final static String INDEX = "home/index";
-    public final static String HELLO = "home/hello";
-    public final static String LOGIN = "home/login";
+	// HOME
+	public final static String INDEX = "home/index";
+	public final static String HELLO = "home/hello";
+	public final static String LOGIN = "home/login";
 
-    // DEGREE
-	public final static String DEGREE_INDEX = "degree/index";
-	public final static String DEGREE_FORM = "degree/form";
-	public final static String DEGREE_NEW = "degree/new";
+	// PRODUCTO
+	public final static String PRODUCTO_FORM = "producto/form";
+	public final static String PRODUCTO_NEW = "producto/new";
+	public final static String PRODUCTO_INDEX = "producto/index";
 
-    // REDIRECTS
-    public final static String ROUTE_INDEX = "/index";
-    public final static String DEGREE_ROOT = "/degrees/";
-    
+	// PEDIDO
+	public final static String PEDIDO_FORM = "pedido/form";
+	public final static String PEDIDO_NEW = "pedido/new";
+	public final static String PEDIDO_INDEX = "pedido/index";
+
+	// VENTA
+	public final static String VENTA_FORM = "venta/form";
+	public final static String VENTA_INDEX = "venta/index";
+	public final static String VENTA_USUARIO = "/usuario/{usuarioId}";
+	
+	// REDIRECTS
+	public final static String ROUTE_INDEX = "/index";
+
 }

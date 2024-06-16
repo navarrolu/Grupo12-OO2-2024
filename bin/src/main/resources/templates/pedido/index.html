@@ -27,14 +27,8 @@
 			color: black;
 		}
 
-		.container {
-			text-align: center;
-			margin-top: 20px;
-		}
-
 		table {
-			width: 60%;
-			margin: 0 auto;
+			width: 100%;
 			border-collapse: collapse;
 		}
 
@@ -42,7 +36,7 @@
 		td {
 			border: 1px solid black;
 			padding: 8px;
-			text-align: center;
+			text-align: left;
 		}
 
 		th {
@@ -85,41 +79,36 @@
 
 	<div class="navbar">
 		<a th:href="@{/index}">Inicio</a>
-		<a th:href="@{/producto/index}">Lista de Productos</a>
+		<a th:href="@{/pedido}">Servicios</a>
+	</div>
+	<h1>Pedidos de Aprovisionamiento</h1>
+
+	<div class="button-container">
+		<form th:action="@{/pedido/new}" method="get">
+			<button type="submit" class="create-button">Crear Nuevo Pedido</button>
+		</form>
 	</div>
 
-	<div class="container">
-		<h1>Pedidos de Aprovisionamiento</h1>
-		<div class="button-container">
-			<form th:action="@{/pedido/form}" method="get">
-				<button type="submit" class="create-button">Crear Nuevo Pedido</button>
-			</form>
-		</div>
-	</div>
-
-	<div class="table-container">
-		<table>
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>Proveedor</th>
-					<th>Producto</th>
-					<th>Cantidad</th>
-					<th>Fecha de Pedido</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="pedido : ${pedidos}">
-					<td><span th:text="${pedido.idPedido}" /></td>
-					<td><span th:text="${pedido.proveedor}" /></td>
-					<td><span th:text="${pedido.producto.descripcion}" /></td>
-					<td><span th:text="${pedido.cantidad}" /></td>
-					<td><span th:text="${pedido.fecha}" /></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Proveedor</th>
+				<th>Producto</th>
+				<th>Cantidad</th>
+				<th>Fecha de Pedido</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="pedido : ${pedido}">
+				<td th:text="${pedido.id}"></td>
+				<td th:text="${pedido.proveedor}"></td>
+				<td th:text="${pedido.producto}"></td>
+				<td th:text="${pedido.cantidad}"></td>
+				<td th:text="${pedido.fechaPedido}"></td>
+			</tr>
+		</tbody>
+	</table>
 </body>
 
 </html>

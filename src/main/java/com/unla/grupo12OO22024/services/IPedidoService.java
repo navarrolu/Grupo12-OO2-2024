@@ -3,10 +3,12 @@ package com.unla.grupo12OO22024.services;
 import java.util.List;
 
 import com.unla.grupo12OO22024.entities.Pedido;
+import com.unla.grupo12OO22024.models.PedidoModel;
 
 public interface IPedidoService {
 
 	public List<Pedido> getAll();
 
-	public Pedido insertOrUpdate(Pedido pedido);
+	public PedidoModel insertOrUpdate(PedidoModel pedidoModel);
+
 }
