@@ -34,7 +34,7 @@ public class ProductoService implements IProductoService {
         return modelMapper.map(producto, ProductoModel.class);
     }
 
-    public  ProductoModel getById ( long id ){
+    public ProductoModel getById ( long id ){
         Producto producto = productoRepository.getReferenceById(id);
         return  modelMapper.map(producto, ProductoModel.class);
     }
@@ -49,27 +49,17 @@ public class ProductoService implements IProductoService {
         }
     }
 
-    public ProductoModel traerPorNombre (String nombre){
+    public Producto traerPorNombre (String nombre){
         Producto producto = productoRepository.findByDescripcion(nombre);
-        ProductoModel productoModel = this.convertToModel(producto);
-        return productoModel;
+        return producto;
     }
 
     public ProductoModel convertToModel(Producto producto) {
-       ProductoModel productoModel = modelMapper.map(producto, ProductoModel.class);
+        ProductoModel productoModel = modelMapper.map(producto, ProductoModel.class);
         return productoModel;
     }
 
-    @Override
-    public Producto entityFromModel(ProductoModel productoModel) {
-        Producto producto = new Producto();
-        producto.setId_producto(productoModel.getId_producto());
-        producto.setDescripcion(productoModel.getDescripcion());
-        producto.setPrecio_total(productoModel.getPrecio_total());
-        producto.setStock(productoModel.getStock());
-        producto.setStock_minimo(productoModel.getStock_minimo());
-        return producto;
-    }
+
 
 
 }

@@ -21,7 +21,7 @@ public class ViewRouteHelper {
     //LOTE
     public final static String LOTE = "lote/lotes";
     public final static String LOTE_NEW = "lote/new";
-    public final static String LOTE_NUEVO = "lote/nuevolote";
+    public final static String LOTE_FORM = "lote/form";
 
     // REDIRECTS
     public final static String ROUTE_INDEX = "/index";

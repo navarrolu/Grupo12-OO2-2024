@@ -40,7 +40,7 @@ public class ProductoController {
         if(bindingResult.hasErrors()){
             mV.setViewName(ViewRouteHelper.PRODUCTO_FORM);
         } else {
-            System.out.printf("%s", producto);
+            //System.out.printf("%s", producto);
             productoService.insertOrUpdate(producto);
             mV.addObject("productos", productoService.getAll());
             mV.addObject("producto", new ProductoModel());

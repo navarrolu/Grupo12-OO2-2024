@@ -5,6 +5,7 @@ import com.unla.grupo12OO22024.entities.Producto;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -31,6 +32,7 @@ public class LoteModel {
     @Min(0)
     private float precio;
 
+    @NotNull
     private Producto producto;
 
     private Long pedido_nro;

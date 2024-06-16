@@ -3,6 +3,7 @@ package com.unla.grupo12OO22024.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -11,9 +12,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,8 +20,6 @@ import lombok.ToString;
 @Setter
 @Entity
 @Table(name = "lote")
-@NoArgsConstructor
-@AllArgsConstructor
 @ToString
 public class Lote {
 
@@ -46,12 +43,13 @@ public class Lote {
     @Column(name = "precio", nullable = false)
     private float precio;
 
-    // Foreign key relationships (assuming Producto and Pedido entities exist)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
     
     @Column(name = "pedido_nro", nullable = false)
     private Long pedido_nro;
+
+
 }

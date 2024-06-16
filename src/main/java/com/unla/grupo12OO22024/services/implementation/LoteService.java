@@ -1,5 +1,6 @@
 package com.unla.grupo12OO22024.services.implementation;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -11,8 +12,6 @@ import com.unla.grupo12OO22024.repositories.ILoteRepository;
 import com.unla.grupo12OO22024.repositories.IProductoRepository;
 import com.unla.grupo12OO22024.services.ILoteService;
 
-import jakarta.transaction.Transactional;
-
 @Service("loteService")
 public class LoteService implements ILoteService{
 
@@ -23,38 +22,38 @@ public class LoteService implements ILoteService{
     @Autowired
     private IProductoRepository productoRepository;
 
+    private ModelMapper modelMapper = new ModelMapper();
+
     @Override
-    @Transactional
-    public Lote saveLote(LoteModel loteModel) {
+    public LoteModel insertOrUpdate(LoteModel loteModel) {
+        //convertir a entidad
+        Lote lote = modelMapper.map(loteModel, Lote.class);
+
+        //Obtener el producto
+        Producto producto = lote.getProducto();
+        int cantStockNuevo = lote.getCantidad();
+
+        //calcular nuevo stock
+        producto.setStock(producto.getStock() + cantStockNuevo);
+        productoRepository.save(producto);
+
+        //guardar lote
+        lote = loteRepository.save(lote);
+
+        //pasar a modelo 
+        return modelMapper.map(lote, LoteModel.class);
+    }
+
+    private Lote modelToEntity(LoteModel loteModel) {
         Lote lote = new Lote();
         lote.setCantidad(loteModel.getCantidad());
         lote.setFechaRecepcion(loteModel.getFechaRecepcion());
         lote.setProveedor(loteModel.getProveedor());
         lote.setPrecio(loteModel.getPrecio());
-        //lote.setProducto(loteModel.getProducto());
-        Producto producto = loteModel.getProducto();
-        if (producto != null) {
-            return loteRepository.save(lote);
-        } else {
-            throw new RuntimeException("Producto no encontrado");
-        }
+        Producto producto = productoRepository.findById(loteModel.getProducto().getId_producto()).orElse(null);
+        lote.setProducto(producto);
+        return lote;
     }
-
-    //private ModelMapper modelMapper = new ModelMapper();
-
-    /*@Override
-    public List<Lote> getAll() {
-        return loteRepository.findAll();
-    }*/
-
-    //TODO implementar demas metodos
-
-    /*public void saveLote(LoteModel loteModel){
-        Lote lote = loteRepository.save ( modelMapper.map(loteModel, 
-        Lote.class));
-       modelMapper.map(lote, LoteModel.class);
-    };*/
-
 
 
 }

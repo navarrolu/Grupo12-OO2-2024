@@ -8,9 +8,10 @@ import com.unla.grupo12OO22024.models.ProductoModel;
 public interface IProductoService {
 
     public List<Producto> getAll();
-    public ProductoModel traerPorNombre(String nombre);
+    public Producto traerPorNombre(String nombre);
     public ProductoModel insertOrUpdate( ProductoModel productoModel );
     public ProductoModel convertToModel(Producto producto);
     public  boolean remove ( long id );
-    public Producto entityFromModel(ProductoModel productoModel);
+    public ProductoModel getById(long productoNombre);
+
 }
