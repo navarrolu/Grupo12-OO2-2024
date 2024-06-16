@@ -55,11 +55,21 @@ public class ProductoService implements IProductoService {
         return productoModel;
     }
 
-    private ProductoModel convertToModel(Producto producto) {
+    public ProductoModel convertToModel(Producto producto) {
        ProductoModel productoModel = modelMapper.map(producto, ProductoModel.class);
         return productoModel;
     }
 
+    @Override
+    public Producto entityFromModel(ProductoModel productoModel) {
+        Producto producto = new Producto();
+        producto.setId_producto(productoModel.getId_producto());
+        producto.setDescripcion(productoModel.getDescripcion());
+        producto.setPrecio_total(productoModel.getPrecio_total());
+        producto.setStock(productoModel.getStock());
+        producto.setStock_minimo(productoModel.getStock_minimo());
+        return producto;
+    }
 
 
 }

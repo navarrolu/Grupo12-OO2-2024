@@ -19,7 +19,7 @@ public class LoteModel {
 
     @Id
     @Setter(AccessLevel.PROTECTED)
-    private long id_lote;
+    private Long id_lote;
 
     private int cantidad;
 
@@ -33,9 +33,9 @@ public class LoteModel {
 
     private Producto producto;
 
-    private long pedido_nro;
+    private Long pedido_nro;
 
-    public LoteModel(long id_lote, int cantidad, String proveedor, float precio, Producto producto, long pedido_nro) {
+    public LoteModel(Long id_lote, int cantidad, String proveedor, float precio, Producto producto, Long pedido_nro) {
         this.id_lote = id_lote;
         this.cantidad = cantidad;
         this.proveedor = proveedor;

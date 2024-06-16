@@ -29,7 +29,7 @@ public class Lote {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.PROTECTED)
-    private long id_lote;
+    private Long id_lote;
 
     @Column(name = "cantidad", nullable = false)
     @Min(0)
@@ -53,5 +53,5 @@ public class Lote {
 
     
     @Column(name = "pedido_nro", nullable = false)
-    private long pedido_nro;
+    private Long pedido_nro;
 }

@@ -12,12 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.unla.grupo12OO22024.entities.Lote;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.models.LoteModel;
 import com.unla.grupo12OO22024.models.ProductoModel;
+import com.unla.grupo12OO22024.services.IProductoService;
 import com.unla.grupo12OO22024.services.implementation.LoteService;
-import com.unla.grupo12OO22024.services.implementation.ProductoService;
 
 import jakarta.validation.Valid;
 
@@ -29,42 +28,43 @@ public class LoteController {
     @Autowired
     @Qualifier("loteService")
     private LoteService loteService;
-    @Autowired
-    private ProductoService productoService;
 
+    @Autowired
+    private IProductoService productoService;
+
+    //obtener la vista del form
     @GetMapping("/nuevolote")
     public String ingresarLotes(Model model) {
         model.addAttribute("lote", new LoteModel());
         return ViewRouteHelper.LOTE_NUEVO;
     }
-    
 
     @PostMapping("/new")
-        public ModelAndView registerLote(@Valid @ModelAttribute("lote") LoteModel lote, 
-                                     @RequestParam("producto") String producto, 
-                                     BindingResult result){
+    public ModelAndView registerLote(@Valid @ModelAttribute("lote") LoteModel loteModel,
+                                     @RequestParam("producto") String productoNombre,
+                                     BindingResult result) {
         ModelAndView mV = new ModelAndView();
         if (result.hasErrors()) {
             mV.setViewName(ViewRouteHelper.LOTE_NUEVO);
-            //TODO mandar mensaje de error
+            mV.addObject("errorMessage", "Error en los datos del lote.");
+            return mV;
+        } 
+
+        ProductoModel productoModel = productoService.traerPorNombre(productoNombre);
+        if (productoModel != null) {
+            productoModel.setStock(productoModel.getStock() + loteModel.getCantidad());
+            productoService.insertOrUpdate(productoModel);
+            loteModel.setProducto(productoService.entityFromModel(productoModel));
+            loteService.saveLote(loteModel);
+            mV.addObject("productos", productoService.getAll());
+            mV.addObject("lote", new LoteModel());
+            mV.setViewName(ViewRouteHelper.INDEX);
         } else {
-            ProductoModel producto1 = productoService.traerPorNombre(producto);
-            System.out.printf("%s", producto1);
-            if (producto1 != null) {
-                producto1.setStock(producto1.getStock() + lote.getCantidad());
-                productoService.insertOrUpdate(producto1);
-                loteService.saveLote(lote);
-                mV.addObject("productos", productoService.getAll());
-                mV.addObject("lote", new Lote());
-                mV.setViewName(ViewRouteHelper.INDEX); 
-            } else {
-                //TODO mandar mensaje de error
-                // mV.addObject("errorMessage", "Producto no encontrado");
-                // mV.setViewName(ViewRouteHelper.LOTE_NUEVO);
-            }
+            mV.addObject("errorMessage", "Producto no encontrado.");
+            mV.setViewName(ViewRouteHelper.LOTE_NUEVO);
         }
+
         return mV;
     }
-
 
 }
