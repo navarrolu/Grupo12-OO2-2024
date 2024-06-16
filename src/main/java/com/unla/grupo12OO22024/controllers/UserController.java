@@ -30,8 +30,4 @@ public class UserController {
         return "redirect:/index";
     }
 
-
-    //TODO: arreglar porblema de redireccionamiento de loginsuccess
-
-
 }

@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 body{
   width: 100%;
@@ -44,7 +45,7 @@ body{
 
 .container-index form {
   width: 1200px;
-  height: 800px;
+  height: 400px;
   padding: 3rem 2rem;
   background-color: white;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.241),
@@ -175,4 +176,73 @@ input[type="submit"]:hover{
   cursor: pointer;
   border: none;
 }
-/* demo  */
+
+  .button {
+    background-color: #21d4fd; /* Button background color */
+    color: white; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    padding: 20px; /* Padding around text */
+    text-align: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+.button-container {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); 
+  grid-gap: 20px; 
+}
+  
+.button-container-producto {
+  display: flex; /* Enable flexbox layout */
+  justify-content: space-around; /* Distribute buttons evenly */
+  align-items: center; /* Align buttons vertically in the center */
+  border: none;
+}
+
+  
+  .button:hover {
+    background-color: #00a8ce; /* Hover background color */
+  }
+
+  .small-button {
+    border: none;
+    background-color: #21d4fd; /* Button background color */
+    color: white; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 15px; /* Smaller padding */
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px; /* Smaller font size */
+    transition: background-color 0.3s ease;
+    margin-top: 50px;
+  }
+  
+  .small-button:hover {
+    background-color: #00a8ce; /* Hover background color */
+  }
+  
+  .product-button {
+    background-color: #21d4fd; /* Adjust background color */
+    color: white; /* Text color */
+    border-radius: 20px; /* Rounded corners */
+    padding: 10px 20px; /* Adjust padding */
+    text-align: center;
+    cursor: pointer;
+    font-size: 14px; /* Font size */
+    transition: background-color 0.3s ease; /* Smoother hover effect */
+  }
+  
+  .product-button:hover {
+    background-color: #00a8ce; /* Hover background color */
+  }
+
+ 
+  
+  table + .button-container {
+    clear: both; /* Clear floats */
+  }
+  .logo {
+    cursor: pointer;
+  }

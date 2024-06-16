@@ -10,16 +10,22 @@
       <form th:action="@{/logout}" method="post">
         <img src="./assets/caja.png" alt="insertar logo" class="logo" />
         <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
-        <main>
-          <button onclick="location.href='/producto/nuevo'" class="btn btn-primary">Ingresar Nuevo Producto</button>
-          <button onclick="location.href='/producto/modif'" class="btn btn-primary">Modificar Producto</button>
-          <button onclick="location.href='/producto/baja'" class="btn btn-primary">Eliminar Producto</button>
-          <button onclick="location.href='/lotes/nuevo'" class="btn btn-primary">Ingresar Nuevo Lote de Mercancía</button>
-          <button onclick="location.href='/informes'" class="btn btn-primary">Vista de Informes</button>
-          <button onclick="location.href='/pedido'" class="btn btn-primary">Generar Pedido de Aprovisionamiento</button>
-        </main>
-        <button type="submit">Cerrar Sesión</button>
+        <div class="button-container">
+          <div class="button">
+            <a th:href="@{/producto/productos}">Productos</a>  </div>
+          <div class="button">
+            <a th:href="@{/lote/nuevolote}">Lote</a>
+          </div>
+          <div class="button">
+            <a th:href="@{/pedido/pedidos}">Pedido</a>
+          </div>
+          <div class="button">
+            <a th:href="@{/informes}">Informe</a>
+          </div>
+        </div>
+        <button type="submit" class="small-button">Cerrar Sesión</button>
       </form>
+      
     </div>
   </body>
 </html>

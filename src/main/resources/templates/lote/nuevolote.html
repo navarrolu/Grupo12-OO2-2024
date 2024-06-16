@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>STOCK - Nuevo Lote</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="icon" href="../assets/caja.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="container container-index">
+        <form action="#" th:action="@{new}" th:object="${lote}" method="post">
+            <a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+
+            <p>Cantidad: <input type="number" th:field="*{cantidad}" /></p>
+            <p>Proveedor: <input type="text" th:field="*{proveedor}" /></p>
+            <p>Precio: <input type="number" th:field="*{precio}" /></p>
+
+            <p>Nombre Producto: <input type="text" th:field="*{producto}" /></p>
+
+            <p>Pedido Nro: <input type="number" th:field="*{pedido_nro}" /></p>
+
+            <input type="submit" value="Registrar Lote">
+
+            <div class="button-container-producto">
+                <button class="product-button"> <a href="../index" >Volver a la vista principal</a></button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

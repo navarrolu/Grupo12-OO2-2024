@@ -16,12 +16,12 @@ public class ViewRouteHelper {
     // PRODUCTO
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String PRODUCTO_NEW = "producto/new";
-
-    public final static String PRODUCTO_INDEX = "producto/index";
+    public final static String PRODUCTO_INDEX = "producto/productos";
 
     //LOTE
-    public final static String LOTE = "home/lotes";
-    public final static String LOTE_NUEVO = "home/nuevolote";
+    public final static String LOTE = "lote/lotes";
+    public final static String LOTE_NEW = "lote/new";
+    public final static String LOTE_NUEVO = "lote/nuevolote";
 
     // REDIRECTS
     public final static String ROUTE_INDEX = "/index";

@@ -1,4 +1,4 @@
-/*package com.unla.grupo12OO22024.controllers;
+package com.unla.grupo12OO22024.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,7 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.grupo12OO22024.entities.Lote;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
+import com.unla.grupo12OO22024.models.LoteModel;
+import com.unla.grupo12OO22024.models.ProductoModel;
+import com.unla.grupo12OO22024.services.implementation.LoteService;
+import com.unla.grupo12OO22024.services.implementation.ProductoService;
+
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -22,35 +29,42 @@ public class LoteController {
     @Autowired
     @Qualifier("loteService")
     private LoteService loteService;
-
+    @Autowired
+    private ProductoService productoService;
 
     @GetMapping("/nuevolote")
-    public String showLoteForm(Model model){
-        model.addAttribute("lote", new Lote());
+    public String ingresarLotes(Model model) {
+        model.addAttribute("lote", new LoteModel());
         return ViewRouteHelper.LOTE_NUEVO;
     }
-    //TODO: Crear lote service
-    //TODO: Crerar modelo lote
+    
 
-    @PostMapping("/nuevolote")
-        public ModelAndView registerLote(@ModelAttribute("lote") Lote lote, 
+    @PostMapping("/new")
+        public ModelAndView registerLote(@Valid @ModelAttribute("lote") LoteModel lote, 
                                      @RequestParam("producto") String producto, 
                                      BindingResult result){
         ModelAndView mV = new ModelAndView();
         if (result.hasErrors()) {
-            //mV.setViewName(ViewRouteHelper.USER_REGISTER);
+            mV.setViewName(ViewRouteHelper.LOTE_NUEVO);
             //TODO mandar mensaje de error
         } else {
-            loteService.saveLote(lote, producto);
-            //TODO no quiero guardar un nuevo registro de producto cada vez que guardo un lote
-            //sino cambiar el stock del producto. chequear
-            //mandar un set a stock desde el ingreso del lote
-            mV.addObject("lote", new Lote());
-            mV.setViewName(ViewRouteHelper.INDEX);
+            ProductoModel producto1 = productoService.traerPorNombre(producto);
+            System.out.printf("%s", producto1);
+            if (producto1 != null) {
+                producto1.setStock(producto1.getStock() + lote.getCantidad());
+                productoService.insertOrUpdate(producto1);
+                loteService.saveLote(lote);
+                mV.addObject("productos", productoService.getAll());
+                mV.addObject("lote", new Lote());
+                mV.setViewName(ViewRouteHelper.INDEX); 
+            } else {
+                //TODO mandar mensaje de error
+                // mV.addObject("errorMessage", "Producto no encontrado");
+                // mV.setViewName(ViewRouteHelper.LOTE_NUEVO);
+            }
         }
         return mV;
     }
 
 
 }
-*/

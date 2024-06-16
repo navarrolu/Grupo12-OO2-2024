@@ -49,7 +49,7 @@ public class ProductoController {
         return  mV;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/productos")
     public ModelAndView index( ){
         ModelAndView mV = new ModelAndView( ViewRouteHelper.PRODUCTO_INDEX);
         mV.addObject("productos", productoService.getAll());
