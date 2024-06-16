@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>default</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Nuevo Producto</title>
+    <link rel="stylesheet" href="../css/login.css" />
+    <link rel="icon" href="../assets/caja.ico"  type="image/x-icon">
+  </head>
 <body>
+    <div class="container container-index"> 
     <form action="#" th:action="@{new}" th:object="${producto}" method="post">
+        <a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
         <p>descripcion : <input type="text" th:field="*{descripcion}" /> </p>
         <p th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"> descripcion error</p>
         <p>precio_total : <input type="number" step="0.1" th:field="*{precio_total}" /> </p>
@@ -15,6 +18,11 @@
         <p>stock_minimo : <input type="number" th:field="*{stock_minimo}" /> </p>
         <p th:if="${#fields.hasErrors('stock_minimo')}" th:errors="*{stock_minimo}"> stock minimo error</p>
         <input type="submit" value="agregar">
+
+        <div class="button-container-producto">
+            <button class="product-button"> <a href="../producto/productos" >Volver a Productos</a></button>
+        </div>
     </form>
+    </div>
 </body>
 </html>

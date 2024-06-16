@@ -1,17 +1,23 @@
 package com.unla.grupo12OO22024.controllers;
 
-import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
-import com.unla.grupo12OO22024.models.ProductoModel;
-import com.unla.grupo12OO22024.services.implementation.ProductoService;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
+
+import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
+import com.unla.grupo12OO22024.models.ProductoModel;
+import com.unla.grupo12OO22024.services.implementation.ProductoService;
+
+import jakarta.validation.Valid;
+
 
 @Controller
 @RequestMapping("/producto")
@@ -34,7 +40,7 @@ public class ProductoController {
         if(bindingResult.hasErrors()){
             mV.setViewName(ViewRouteHelper.PRODUCTO_FORM);
         } else {
-            System.out.printf("%s", producto);
+            //System.out.printf("%s", producto);
             productoService.insertOrUpdate(producto);
             mV.addObject("productos", productoService.getAll());
             mV.addObject("producto", new ProductoModel());
@@ -43,7 +49,7 @@ public class ProductoController {
         return  mV;
     }
 
-    @GetMapping("/index")
+    @GetMapping("/productos")
     public ModelAndView index( ){
         ModelAndView mV = new ModelAndView( ViewRouteHelper.PRODUCTO_INDEX);
         mV.addObject("productos", productoService.getAll());
