@@ -1,4 +1,5 @@
 spring:
+
   datasource:
     url: jdbc:mysql://localhost:3306/bd_prueba
     username: root
@@ -14,4 +15,3 @@ spring:
     cache: false
   application:
     name: grupo-12-OO2-2024
-

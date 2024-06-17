@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Lista de Compras</title>
+	<style>
+		body {
+			font-family: cursive;
+		}
+
+		.navbar {
+			overflow: hidden;
+			background-color: rgb(128, 0, 255);
+		}
+
+		.navbar a {
+			float: left;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 14px 20px;
+			text-decoration: none;
+		}
+
+		.navbar a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+		.container {
+			text-align: center;
+			margin-top: 20px;
+		}
+
+		table {
+			width: 60%;
+			margin: 0 auto;
+			border-collapse: collapse;
+		}
+
+		th,
+		td {
+			border: 1px solid black;
+			padding: 8px;
+			text-align: center;
+		}
+
+		th {
+			background-color: #f2f2f2;
+		}
+
+		tr:nth-child(even) {
+			background-color: #f9f9f9;
+		}
+
+		.button-container {
+			margin: 20px 0;
+		}
+
+		.create-button {
+			font-family: cursive;
+			background-color: rgb(128, 0, 255);
+			color: white;
+			padding: 10px 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			border: none;
+			cursor: pointer;
+		}
+
+		.create-button:hover {
+			background-color: #45a049;
+		}
+
+		/* Agrega un mayor margen inferior para separar más la tabla del botón */
+		.table-container {
+			margin-top: 40px;
+		}
+	</style>
+</head>
+
+<body>
+
+	<div class="navbar">
+		<a th:href="@{/index}">Inicio</a>
+	</div>
+
+	<div class="container">
+		<h1>Compras Realizadas</h1>
+		<div class="button-container">
+			<form th:action="@{/venta/form}" method="get">
+				<button type="submit" class="create-button">Nueva Compra</button>
+			</form>
+		</div>
+	</div>
+
+	<div class="table-container">
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Usuario</th>
+					<th>Producto</th>
+					<th>Cantidad</th>
+					<th>Fecha de Venta</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="venta : ${ventas}">
+					<td><span th:text="${venta.idVenta}" /></td>
+					<td><span th:text="${venta.usuario}" /></td>
+					<td><span th:text="${venta.producto.descripcion}" /></td>
+					<td><span th:text="${venta.cantidad}" /></td>
+					<td><span th:text="${venta.fecha}" /></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</body>
+
+</html>
