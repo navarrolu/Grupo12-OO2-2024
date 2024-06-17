@@ -54,9 +54,9 @@ public class UserController {
         UserRole userRole =  userRoleOpcional.get();
 
         if (userRole.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
-            return "redirect:/index"; // Redirecciona a la vista para administradores
+            return "redirect:/" + ViewRouteHelper.INDEX; // Redirecciona a la vista para administradores
         } else {
-            return "redirect:/compra"; // Redirecciona a la vista para usuarios regulares
+            return "redirect:/" + ViewRouteHelper.VENTA_COMPRAS; // Redirecciona a la vista para usuarios regulares
         }
     }
 

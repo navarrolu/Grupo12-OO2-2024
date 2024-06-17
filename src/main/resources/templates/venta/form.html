@@ -1,102 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Nuevo Pedido</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container container-index">
+      <form action="#" th:action="@{new}" th:object="${venta}" method="post">
+        <a href="../venta/compras" 
+          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
+        /></a> 
+        <h1>Nuevo Compra</h1>
 
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Compra</title>
-	<style>
-		body {
-			font-family: cursive;
-			margin: 0;
-			padding: 20px;
-			background-color: #f4f4f9;
-			display: grid;
-			justify-content: center;
-			/* Centra horizontalmente */
-		}
+        <div class="lote-form-container">
+          <label for="producto">Producto:</label>
+          <p>
+            Producto:
+            <select class="lote-input" id="producto" name="producto" required>
+              <option value="">Seleccione un producto</option>
+              <th:block th:each="producto : ${productos}">
+                <option
+                  th:value="${producto.id_producto}"
+                  th:text="${producto.descripcion}"
+                ></option>
+              </th:block>
+            </select>
+          </p>
 
-		.container {
-			max-width: 100px;
-			margin: auto;
-			background: white;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
+          <p>
+            Cantidad:
+            <input
+              class="lote-input"
+              type="number"
+              step="1"
+              th:field="*{cantidad}"
+            />
+          </p>
+          <p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">
+            Cantidad error
+          </p>
 
-		h1 {
-			text-align: center;
-			color: #333;
-		}
+          <p>
+            Fecha: <input class="lote-input" type="date" th:field="*{fecha}" />
+          </p>
+          <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
+            Fecha error
+          </p>
 
-		form {
-			display: flex;
-			flex-direction: column;
-		}
 
-		label {
-			margin: 10px 0 5px;
-			font-weight: bold;
-		}
+          <input class="product-button" type="submit" value="Realizar Compra" />
 
-		input[type="text"],
-		input[type="number"],
-		input[type="date"],
-		textarea,
-		select {
-			padding: 10px;
-			margin-bottom: 20px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		textarea {
-			resize: vertical;
-			height: 50px;
-		}
-
-		button {
-			padding: 15px;
-			background-color: rgb(128, 0, 255);
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			font-size: 16px;
-		}
-
-		button:hover {
-			background-color: rgb(128, 0, 255);
-		}
-	</style>
-</head>
-
-<body>
-	<h1>~ Productos ~</h1>
-	<form action="#" th:action="@{new}" th:object="${venta}" method="post">
-
-		<label for="producto">Producto:</label>
-		<select id="producto" name="producto" required>
-			<option value="">Seleccione un producto</option>
-			<!-- Supongamos que "productos" es la lista de productos disponible en el modelo -->
-			<th:block th:each="producto : ${productos}">
-				<option th:value="${producto.id_producto}" th:text="${producto.descripcion}"></option>
-			</th:block>
-		</select>
-
-		<p>Cantidad : <input type="number" step="1" th:field="*{cantidad}" /> </p>
-		<p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"> cantidad error</p>
-
-		<div class="button-container">
-			<button type="submit">Comprar</button>
-			<button type="button" onclick="history.back()">Volver</button>
-		</div>
-	</form>
-</body>
-
+          <div class="button-container-producto">
+            <button class="product-button">
+              <a href="../venta/compras">Volver a mis Compras</a>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>

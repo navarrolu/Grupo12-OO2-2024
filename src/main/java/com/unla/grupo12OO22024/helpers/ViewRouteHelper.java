@@ -32,8 +32,8 @@ public class ViewRouteHelper {
 
 	// VENTA
 	public final static String VENTA_FORM = "venta/form";
-	public final static String VENTA_INDEX = "venta/compras";
+	public final static String VENTA_COMPRAS = "venta/compras";
+	public final static String VENTA_INDEX = "venta/index";
 	public final static String VENTA_USUARIO = "/usuario/{usuarioId}";
-
 
 }
