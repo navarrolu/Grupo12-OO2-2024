@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.unla.grupo12OO22024.entities.User;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
@@ -24,11 +25,6 @@ public class RegistrationController {
     @Autowired
     @Qualifier("userService")
     private UserService userService;
-    
-    
-    /*public RegistrationController (UserService userService){
-        this.userService = userService;
-    }*/
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -36,31 +32,27 @@ public class RegistrationController {
         return ViewRouteHelper.USER_REGISTER;
     }
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, 
+    public ModelAndView registerUser(@ModelAttribute("user") User user, 
                                      @RequestParam("role") String role, 
+                                     RedirectAttributes redirectAttributes,
                                      BindingResult result){
         ModelAndView mV = new ModelAndView();
         if (result.hasErrors()) {
-            return ViewRouteHelper.USER_REGISTER;
+            mV.setViewName(ViewRouteHelper.USER_REGISTER);
         } else {
             userService.saveUserWithRole(user, role);
             mV.addObject("user", new User());
-            //mV.setViewName(ViewRouteHelper.INDEX);
-
-            //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            //String username = authentication.getName();
-
-            //traigo el user en forma de entitie
-            //com.unla.grupo12OO22024.entities.User user =  userService.traerPorNombre(username);
-            //traigo el user_role en forma de entitie
-            //Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
-            //UserRole userRole =  userRoleOpcional.get();
 
             if (role.equalsIgnoreCase("ROLE_ADMIN")) {
-                return "redirect:/" + ViewRouteHelper.INDEX; // Redirecciona a la vista para administradores
+               mV.setViewName(ViewRouteHelper.ROUTE_INDEX); // Redirecciona a la vista para administradores
             } else {
-                return "redirect:/" + ViewRouteHelper.VENTA_COMPRAS; // Redirecciona a la vista para usuarios regulares
+                mV.setViewName(ViewRouteHelper.ROUTE_USER); // Redirecciona a la vista para usuarios regulares
+            }
+            if (user != null) {
+                // User registration successful
+                redirectAttributes.addFlashAttribute("registrationSuccess", "Usuario registrado exitosamente!"); // Add flash attribute
             }
         }
+        return mV;
     }
 }

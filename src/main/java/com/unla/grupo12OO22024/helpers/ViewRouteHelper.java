@@ -21,8 +21,8 @@ public class ViewRouteHelper {
 
 
     // REDIRECTS
-    public final static String ROUTE_INDEX = "redirect:/index";
-    public final static String DEGREE_ROOT = "/degrees/";
+    public final static String ROUTE_INDEX = "redirect:/index"; //login redirect para admin
+	public final static String ROUTE_USER = "redirect:/venta/compras"; //login redirect de usuario
 
 	// PEDIDO
 	public final static String PEDIDO_FORM = "pedido/form";

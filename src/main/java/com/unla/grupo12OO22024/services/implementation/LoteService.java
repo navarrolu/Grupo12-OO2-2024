@@ -42,16 +42,15 @@ public class LoteService implements ILoteService{
 
     @Transactional
     public LoteModel insertOrUpdate(LoteModel loteModel) {
-
-        Optional<Producto> optionalProducto = productoRepository.findById(loteModel.getProducto().getId_producto());
-        Producto producto = optionalProducto.get();
-
+        
         //convertir a entidad
         Lote lote = modelMapper.map(loteModel, Lote.class);
 
 
         //calcular nuevo stock
-        producto.setStock(producto.getStock() + loteModel.getCantidad());
+        Optional<Producto> optionalProducto = productoRepository.findById(loteModel.getPedido().getProducto().getId_producto());
+        Producto producto = optionalProducto.get();
+        producto.setStock(producto.getStock() + loteModel.getPedido().getProducto().getStock());
         productoRepository.save(producto);
 
         //guardar lote

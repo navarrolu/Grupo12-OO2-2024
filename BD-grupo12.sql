@@ -1,33 +1,47 @@
-create database IF NOT EXISTS bd_grupo12;
+create database IF NOT EXISTS bd_prueba;
+use bd_prueba;
 
-use bd_grupo12;
+/* --------------------------------------- [Usuario] ----------------------------------------------------------*/
 
-/*----------------------- [Usuario] --------------------------*/
-CREATE TABLE `usuario` (
-  `id_usuario` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `user_role` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  `baja` bit(1) DEFAULT b'0',  
-  PRIMARY KEY (`id_usuario`)
+CREATE TABLE user (
+    `id_usuario` BIGINT AUTO_INCREMENT PRIMARY KEY,
+    `username` VARCHAR(45) NOT NULL UNIQUE,
+    `password` VARCHAR(60) NOT NULL,
+    `baja` BOOLEAN,
+    `createdat` DATETIME DEFAULT CURRENT_TIMESTAMP,
+    `updateat` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
-/*----------------------- [Usuario] --------------------------*/
 
-/*---------------------- [Producto] -------------------------*/
+
+/* --------------------------------------- [User Role] ----------------------------------------------------------*/
+CREATE TABLE `user_role` (
+	`id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+	`role` VARCHAR(100) NOT NULL,
+	`createdat` DATETIME DEFAULT CURRENT_TIMESTAMP,
+	`updatedat` DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `id_usuario` BIGINT NOT NULL,
+	CONSTRAINT `fkUser` FOREIGN KEY (`id_usuario`) REFERENCES `user` (`id_usuario`)
+);
+INSERT INTO user_role (role, createdat, updatedat)
+VALUES ( 'ADMIN', CURRENT_TIMESTAMP, current_timestamp );
+INSERT INTO user_role (role, createdat, updatedat)
+VALUES ( 'USER', CURRENT_TIMESTAMP, current_timestamp );
+
+
+/* --------------------------------------- [Producto] ----------------------------------------------------------*/
 CREATE TABLE `producto` (
-  `id_producto` int NOT NULL AUTO_INCREMENT,
+  `id_producto` BIGINT AUTO_INCREMENT,
   `descripcion` varchar(50) NOT NULL,
   `precio_total` float NOT NULL,
   `stock` int NOT NULL,
   `stock_minimo` int NOT NULL,
   PRIMARY KEY (`id_producto`)
 );
-/*---------------------- [Producto] -------------------------*/
 
-/*----------------------- [Pedido] --------------------------*/
+/* --------------------------------------- [Pedido] ----------------------------------------------------------*/
 CREATE TABLE `pedido` (
   `id_pedido` int NOT NULL AUTO_INCREMENT,
-  `id_producto` int NOT NULL,
+  `id_producto` bigint NOT NULL,
   `cantidad` int NOT NULL,
   `fecha` date NOT NULL,
   `proveedor` varchar(50) NOT NULL,
@@ -36,32 +50,28 @@ CREATE TABLE `pedido` (
   CONSTRAINT `fk_pedido` FOREIGN KEY (`id_producto`)
   REFERENCES `producto` (`id_producto`) 
 );
-/*----------------------- [Pedido] --------------------------*/
 
-/*------------------------ [Lote] ---------------------------*/
+
+/* --------------------------------------- [Lote] ----------------------------------------------------------*/
 CREATE TABLE `lote` (
-  `id_lote` int NOT NULL AUTO_INCREMENT,
-  `id_producto` int NOT NULL,
-  `id_pedido` int NOT NULL,
+  `id_lote` BIGINT AUTO_INCREMENT PRIMARY KEY,
   `cantidad` int NOT NULL,
-  `fecha_recepcion` date NOT NULL,
-  `proveedor` varchar(50) NOT NULL,
+  `fecha_recepcion` DATETIME DEFAULT CURRENT_TIMESTAMP,
+  `proveedor` varchar(60) NOT NULL,
   `precio` float NOT NULL,
-   PRIMARY KEY (`id_lote`),
-   KEY `fk_lote_idx` (`id_producto`),
-   CONSTRAINT `fk_lote_producto` FOREIGN KEY (`id_producto`)
-   REFERENCES `producto` (`id_producto`),
-   CONSTRAINT `fk_lote_pedido` FOREIGN KEY (`id_pedido`)
-   REFERENCES `pedido` (`id_pedido`)
+  `id_producto` bigint not null,
+  `id_pedido` int,
+  CONSTRAINT `fkProducto` FOREIGN KEY (`id_producto`) REFERENCES `producto` (`id_producto`),
+  CONSTRAINT `fk_lote_pedido` FOREIGN KEY (`id_pedido`) REFERENCES `pedido` (`id_pedido`)
 );
-/*------------------------ [Lote] ---------------------------*/
 
-/*------------------------ [Venta] --------------------------*/
+/* --------------------------------------- [Venta] ----------------------------------------------------------*/
 CREATE TABLE `venta` (
   `id_venta` int NOT NULL AUTO_INCREMENT,
   `id_producto` int NOT NULL,
   `id_usuario` int NOT NULL,
   `cantidad` int NOT NULL,
+  `total` float NOT NULL,
   `fecha` date NOT NULL,
   PRIMARY KEY (`id_venta`),
   KEY `fk_venta_idx` (`id_producto`),
@@ -70,7 +80,21 @@ CREATE TABLE `venta` (
   CONSTRAINT `fk_venta_usuario` FOREIGN KEY (`id_usuario`)
   REFERENCES `usuario` (`id_usuario`) 
 );
-/*------------------------ [Venta] --------------------------*/
 
 
 
+
+
+/* --------------------------------------- mostrar registros----------------------------------------------------------*/
+SELECT * FROM user left join user_role on user.id_usuario = user_role.id_usuario;
+SELECT * FROM user_role;
+SELECT * FROM producto;
+SELECT * FROM lote;
+SELECT * FROM pedido;
+SELECT * FROM venta;
+/* -------------------------------------------- eliminar una tabla ------------------------------------------------------*/
+DROP TABLE user_role;
+DROP TABLE user;
+DROP table producto;
+DROP TABLE lote;
+DROP TABLE pedido;
