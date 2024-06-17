@@ -14,6 +14,7 @@ import java.util.List;
 @Service("productoService")
 public class ProductoService implements IProductoService {
 
+
     @Autowired
     @Qualifier("productoRepository")
     private IProductoRepository productoRepository;
@@ -27,11 +28,17 @@ public class ProductoService implements IProductoService {
     }
 
     @Override
+    public List<Producto> getAllLowStock() {
+        return productoRepository.findAllLowStock();
+    }
+
+    @Override
     public ProductoModel insertOrUpdate(ProductoModel productoModel) {
 
         Producto producto = productoRepository.save( modelMapper.map(productoModel, Producto.class));
         return modelMapper.map(producto, ProductoModel.class);
     }
+
 
     public  ProductoModel getById ( long id ){
         Producto producto = productoRepository.getReferenceById(id);

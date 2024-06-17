@@ -23,6 +23,7 @@ public class Producto {
     private float precio_total;
     @Column(name = "stock", nullable = false)
     private int stock;
+    //precio base
     @Column(name = "stock_minimo", nullable = false)
     private int stock_minimo;
 

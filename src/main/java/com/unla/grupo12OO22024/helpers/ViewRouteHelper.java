@@ -13,7 +13,6 @@ public class ViewRouteHelper {
     // PRODUCTO
     public final static String PRODUCTO_FORM = "producto/form";
     public final static String PRODUCTO_NEW = "producto/new";
-
     public final static String PRODUCTO_INDEX = "producto/index";
 
     // REDIRECTS

@@ -9,6 +9,8 @@ public interface IProductoService {
 
     public List<Producto> getAll();
 
+    public List<Producto> getAllLowStock();
+
     public ProductoModel insertOrUpdate( ProductoModel productoModel );
 
     public  boolean remove ( long id );
