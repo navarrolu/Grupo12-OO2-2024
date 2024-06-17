@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.unla.grupo12OO22024.entities.Pedido;
 import com.unla.grupo12OO22024.entities.Producto;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.models.LoteModel;
 import com.unla.grupo12OO22024.services.implementation.LoteService;
+import com.unla.grupo12OO22024.services.implementation.PedidoService;
 import com.unla.grupo12OO22024.services.implementation.ProductoService;
 
 import jakarta.validation.Valid;
@@ -33,10 +35,14 @@ public class LoteController {
     @Qualifier("productoService")
     private ProductoService productoService;
 
+    @Qualifier("pedidoService")
+    private PedidoService pedidoService;
 
-    public LoteController(LoteService loteService, ProductoService productoService) {
+
+    public LoteController(LoteService loteService, ProductoService productoService, PedidoService pedidoService) {
 		this.loteService = loteService;
 		this.productoService = productoService;
+        this.pedidoService = pedidoService;
 	}
 
     
@@ -44,7 +50,9 @@ public class LoteController {
     @GetMapping("/form")
     public String lote(Model model) {
         List<Producto> productos = productoService.getAll();
+        List<Pedido> pedidos = pedidoService.getAll();
         model.addAttribute("productos", productos);
+        model.addAttribute("pedidos", pedidos);
         model.addAttribute("lote", new LoteModel());
         return ViewRouteHelper.LOTE_FORM;
     }
@@ -59,12 +67,20 @@ public class LoteController {
         }else{
             loteService.insertOrUpdate(lote);
             mV.addObject("productos", productoService.getClass());
+            mV.addObject("pedidos", pedidoService.getClass());
             mV.addObject("lote", new LoteModel());
             mV.setViewName(ViewRouteHelper.ROUTE_INDEX);
         }
         return mV;
     }
 
+    @GetMapping("/lotes")
+    public ModelAndView index( ){
+        ModelAndView mV = new ModelAndView( ViewRouteHelper.LOTE);
+        mV.addObject("lotes", loteService.getAll());
+        mV.addObject("lote", new LoteModel());
+        return  mV;
+    }
     
 
 }

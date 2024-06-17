@@ -10823,23 +10823,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
-<<<<<<< HEAD
-}
-=======
-}
-html {
-  scroll-padding-top: 3.5rem;
-}
 
-header {
-  padding-top: 9.5rem;
-  padding-bottom: 6rem;
-}
-
-section {
-  padding-top: 9rem;
-  padding-bottom: 9rem;
-}
 .button-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two columns */
@@ -10876,4 +10860,4 @@ section {
 .small-button:hover {
   background-color: #00a8ce; /* Hover background color */
 }
->>>>>>> main
+}

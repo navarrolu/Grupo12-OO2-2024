@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>STOCK - Lotes</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/caja.ico" type="image/x-icon">
+</head>
+<body>
+  <div class="container container-index">
+    <form>
+      <a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+      <h1>Registro de Lotes</h1>
+      <table class="lote-table">
+        <thead>
+          <tr>
+            <th>ID Lote</th>
+            <th>Cantidad</th>  <th>Fecha de Recepción</th>
+            <th>Proveedor</th>  <th>Precio</th>
+            <th>Nro. Pedido</th>  <th>Nombre del Producto</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="lote : ${lotes}">  
+			<td><span th:text="${lote.id_lote}"></span></td>
+            <td><span th:text="${lote.cantidad}"></span>  </td>
+            <td><span th:text="${#temporals.format(lote.fecha_recepcion, 'dd/MM/yyyy')}"></span></td>
+            <td><span th:text="${lote.proveedor}"></span>  </td>
+            <td><span th:text="${lote.precio}"></span>  </td>
+            <td><span th:text="${lote.pedido.id_pedido}"></span></td>
+            <td><span th:text="${lote.producto.descripcion}"></span></td>
+          </tr>
+        </tbody>
+      </table>
+	  <div class="button-container-producto">
+		<button class="product-button"> <a href="../lote/form"0 >Nuevo Lote</a></button>
+	 </div>
+    </form>
+  </div>
+</body>
+</html>

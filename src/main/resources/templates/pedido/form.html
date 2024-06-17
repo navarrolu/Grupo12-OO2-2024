@@ -1,108 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
-
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pedido de Aprovisionamiento</title>
-	<style>
-		body {
-			font-family: cursive;
-			margin: 0;
-			padding: 20px;
-			background-color: #f4f4f9;
-			display: grid;
-			justify-content: center;
-			/* Centra horizontalmente */
-		}
-
-		.container {
-			max-width: 100px;
-			margin: auto;
-			background: white;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-		}
-
-		h1 {
-			text-align: center;
-			color: #333;
-		}
-
-		form {
-			display: flex;
-			flex-direction: column;
-		}
-
-		label {
-			margin: 10px 0 5px;
-			font-weight: bold;
-		}
-
-		input[type="text"],
-		input[type="number"],
-		input[type="date"],
-		textarea,
-		select {
-			padding: 10px;
-			margin-bottom: 20px;
-			border: 1px solid #ddd;
-			border-radius: 5px;
-			width: 100%;
-			box-sizing: border-box;
-		}
-
-		textarea {
-			resize: vertical;
-			height: 50px;
-		}
-
-		button {
-			padding: 15px;
-			background-color: rgb(128, 0, 255);
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			font-size: 16px;
-		}
-
-		button:hover {
-			background-color: rgb(128, 0, 255);
-		}
-	</style>
+  <title>STOCK - Nuevo Pedido</title>
+  <link rel="stylesheet" href="../css/styles2.css" />  <link rel="icon" href="../assets/caja.ico" type="image/x-icon">
 </head>
-
 <body>
-	<h1>~ Nuevo Pedido ~</h1>
-	<form action="#" th:action="@{new}" th:object="${pedido}" method="post">
+  <div class="container container-index">
+    <form action="#" th:action="@{new}" th:object="${pedido}" method="post">
+      <a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+      <h1> Nuevo Pedido </h1>
 
-		<label for="producto">Producto:</label>
-		<select id="producto" name="producto" required>
-			<option value="">Seleccione un producto</option>
-			<!-- Supongamos que "productos" es la lista de productos disponible en el modelo -->
-			<th:block th:each="producto : ${productos}">
-				<option th:value="${producto.id_producto}" th:text="${producto.descripcion}"></option>
-			</th:block>
-		</select>
+      <label for="producto">Producto:</label>
+      <select id="producto" name="producto" required>
+        <option value="">Seleccione un producto</option>
+        <th:block th:each="producto : ${productos}">
+          <option th:value="${producto.id_producto}" th:text="${producto.descripcion}"></option>
+        </th:block>
+      </select>
 
-		<p>Cantidad : <input type="number" step="1" th:field="*{cantidad}" /> </p>
-		<p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}"> cantidad error</p>
+      <p>Cantidad: <input type="number" step="1" th:field="*{cantidad}" /></p>
+      <p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">Cantidad error</p>
 
-		<p>Fecha : <input type="date" th:field="*{fecha}" /> </p>
-		<p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}"> fecha error</p>
+      <p>Fecha: <input type="date" th:field="*{fecha}" /></p>
+      <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">Fecha error</p>
 
-		<p>Proveedor : <input type="text" th:field="*{proveedor}" /> </p>
-		<p th:if="${#fields.hasErrors('proveedor')}" th:errors="*{proveedor}"> proveedor error</p>
+      <p>Proveedor: <input type="text" th:field="*{proveedor}" /></p>
+      <p th:if="${#fields.hasErrors('proveedor')}" th:errors="*{proveedor}">Proveedor error</p>
 
-		<div class="button-container">
-			<button type="submit">Enviar Pedido</button>
-			<button type="button" onclick="history.back()">Volver</button>
-		</div>
-	</form>
+      <input type="submit" value="Enviar Pedido">
+
+      <div class="button-container-producto">
+        <button class="product-button"> <a href="../pedido/pedidos">Volver a Pedidos</a></button>  </div>
+    </form>
+  </div>
 </body>
-
 </html>

@@ -19,7 +19,7 @@ public class PedidoModel {
 
 	@Id
 	@Setter(AccessLevel.PROTECTED)
-	private int idPedido;
+	private int id_pedido;
 
 	private Producto producto;
 
@@ -30,7 +30,7 @@ public class PedidoModel {
 	private String proveedor;
 
 	public PedidoModel(int idPedido, Producto producto, int cantidad, LocalDate fecha, String proveedor) {
-		this.idPedido = idPedido;
+		this.id_pedido = idPedido;
 		this.producto = producto;
 		this.cantidad = cantidad;
 		this.fecha = fecha;
