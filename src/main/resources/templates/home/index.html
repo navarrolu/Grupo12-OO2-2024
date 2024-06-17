@@ -1,44 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>UNLa - OO2 2024</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-    </head>
-    <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">TPI OO2 - Spring Boot</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" th:href="@{/producto/index}">Lista de Productos</a></li>
-						<li class="nav-item"><a class="nav-link" th:href="@{/pedido/index}">Pedidos</a></li>
-                        <li class="nav-item dropdown">
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-        <!-- Page content-->
-        <div class="container">
-            <div class="text-center mt-5">
-                <h1>A Bootstrap 5 Starter Template</h1>
-                <p class="lead">A complete project boilerplate built with Bootstrap</p>
-                <p>Bootstrap v5.2.3</p>
-            </div>
+
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Control y Pedido</title>
+    <link rel="stylesheet" href="./css/login.css" />
+    <link rel="icon" href="./assets/caja.ico"  type="image/x-icon">
+  </head>
+  <body>
+    <div class="container container-index">
+      <form th:action="@{/logout}" method="post">
+        <img src="./assets/caja.png" alt="insertar logo" class="logo" />
+        <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
+        <div class="button-container">
+          <div class="button">
+            <a th:href="@{/producto/productos}">Productos</a>  </div>
+          <div class="button">
+            <a th:href="@{/lote/form}">Lote</a>
+          </div>
+          <div class="button">
+            <a th:href="@{/pedido/pedidos}">Pedido</a>
+          </div>
+          <div class="button">
+            <a th:href="@{/informes}">Informe</a>
+          </div>
         </div>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+        <button type="submit" class="small-button">Cerrar Sesión</button>
+      </form>
+      
+    </div>
+  </body>
 </html>

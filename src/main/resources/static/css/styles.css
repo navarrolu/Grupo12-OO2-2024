@@ -10823,4 +10823,57 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+<<<<<<< HEAD
 }
+=======
+}
+html {
+  scroll-padding-top: 3.5rem;
+}
+
+header {
+  padding-top: 9.5rem;
+  padding-bottom: 6rem;
+}
+
+section {
+  padding-top: 9rem;
+  padding-bottom: 9rem;
+}
+.button-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two columns */
+  grid-gap: 20px; /* Spacing between buttons */
+}
+
+.button {
+  background-color: #21d4fd; /* Button background color */
+  color: white; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  padding: 20px; /* Padding around text */
+  text-align: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+.button:hover {
+  background-color: #00a8ce; /* Hover background color */
+}
+
+
+.small-button {
+  background-color: #21d4fd; /* Button background color */
+  color: white; /* Text color */
+  border-radius: 20px; /* Rounded corners */
+  padding: 10px 15px; /* Smaller padding */
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px; /* Smaller font size */
+  transition: background-color 0.3s ease;
+}
+
+.small-button:hover {
+  background-color: #00a8ce; /* Hover background color */
+}
+>>>>>>> main

@@ -1,15 +1,16 @@
 package com.unla.grupo12OO22024.services.implementation;
 
-import com.unla.grupo12OO22024.entities.Producto;
-import com.unla.grupo12OO22024.models.ProductoModel;
-import com.unla.grupo12OO22024.repositories.IProductoRepository;
-import com.unla.grupo12OO22024.services.IProductoService;
+import java.util.List;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.unla.grupo12OO22024.entities.Producto;
+import com.unla.grupo12OO22024.models.ProductoModel;
+import com.unla.grupo12OO22024.repositories.IProductoRepository;
+import com.unla.grupo12OO22024.services.IProductoService;
 
 @Service("productoService")
 public class ProductoService implements IProductoService {
@@ -33,7 +34,7 @@ public class ProductoService implements IProductoService {
         return modelMapper.map(producto, ProductoModel.class);
     }
 
-    public  ProductoModel getById ( long id ){
+    public ProductoModel getById ( long id ){
         Producto producto = productoRepository.getReferenceById(id);
         return  modelMapper.map(producto, ProductoModel.class);
     }
@@ -47,6 +48,18 @@ public class ProductoService implements IProductoService {
             return false;
         }
     }
+
+    public Producto traerPorNombre (String nombre){
+        Producto producto = productoRepository.findByDescripcion(nombre);
+        return producto;
+    }
+
+    public ProductoModel convertToModel(Producto producto) {
+        ProductoModel productoModel = modelMapper.map(producto, ProductoModel.class);
+        return productoModel;
+    }
+
+
 
 
 }

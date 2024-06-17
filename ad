@@ -1,0 +1,54 @@
+[33mcommit edabcd7935263e2674f44830c01649063729950c[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mLucia[m[33m, [m[1;31morigin/Lucia[m[33m)[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Thu Jun 6 16:36:35 2024 -0300
+
+    se agrega a la funcion de login, falta conectar y autenticar
+
+[33mcommit 44dd98d61365efdb40207d96a3d517fd5e98bd00[m
+Merge: efbb273 9e355f2
+Author: lu <navarromartalucia@gmail.com>
+Date:   Mon Jun 3 17:59:18 2024 -0300
+
+    Se agrego vista front al login
+
+[33mcommit efbb2735f5f9ed612cd2f38ec9cab13c67f0add4[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Mon Jun 3 17:51:38 2024 -0300
+
+    se agregaron detalles de la vista del login
+
+[33mcommit 9e355f28d9f62a1f50e25aba83170842a705f05d[m
+Author: navarrolu <navarromartalucia@gmail.com>
+Date:   Mon Jun 3 17:23:59 2024 -0300
+
+    Update README.md
+
+[33mcommit 0acc9d4232150212131e3abf9c4b2917211a4b2a[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Mon Jun 3 17:13:48 2024 -0300
+
+    configuracion base cambiada | SERVIDOR FUNCIONANDO
+
+[33mcommit f7d01c1ad4288287d6e3b958a59237ccb8fa4f22[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Mon Jun 3 02:08:15 2024 -0300
+
+    se configuro el pom, error connector arreglado, verificar error de lombok
+
+[33mcommit bc2d08bd430cada868f24662ccc2bf8ea9d2b270[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Sat Jun 1 14:59:15 2024 -0300
+
+    inicio
+
+[33mcommit ec82f666e129db4ddc4cb600ea03c150ad3f76ce[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Sat Jun 1 14:56:34 2024 -0300
+
+    first commit
+
+[33mcommit 0775025ad93aba788e271f3585cde0b91deb1590[m
+Author: lu <navarromartalucia@gmail.com>
+Date:   Sat Jun 1 14:55:45 2024 -0300
+
+    first commit
