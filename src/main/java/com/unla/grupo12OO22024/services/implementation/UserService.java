@@ -3,6 +3,7 @@ package com.unla.grupo12OO22024.services.implementation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.context.annotation.ComponentScan;
@@ -78,6 +79,16 @@ public class UserService implements UserDetailsService {
         userRole.setUser(user);
         userRoleRepository.save(userRole);
     }
+
+    public com.unla.grupo12OO22024.entities.User traerPorNombre(String username) {
+        com.unla.grupo12OO22024.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
+		return user;
+    }
+
+	public Optional<UserRole> traerUserRole(Long id) {
+		Optional<UserRole> userRole = userRoleRepository.findById(id);
+		return userRole;
+	}
 
 	
 }

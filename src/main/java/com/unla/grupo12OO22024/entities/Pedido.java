@@ -28,7 +28,7 @@ public class Pedido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Setter(AccessLevel.PROTECTED)
-	private int idPedido;
+	private int id_pedido;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_producto", nullable = false)

@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.unla.grupo12OO22024.models.PedidoModel;
 import com.unla.grupo12OO22024.entities.Producto;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
+import com.unla.grupo12OO22024.models.PedidoModel;
 import com.unla.grupo12OO22024.services.implementation.PedidoService;
 import com.unla.grupo12OO22024.services.implementation.ProductoService;
 
@@ -40,7 +40,7 @@ public class PedidoController {
 		this.productoService = productoService;
 	}
 
-	@GetMapping("/index")
+	@GetMapping("/pedidos")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_INDEX);
 		mAV.addObject("pedidos", pedidoService.getAll());

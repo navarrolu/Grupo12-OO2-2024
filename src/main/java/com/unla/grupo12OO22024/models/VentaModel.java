@@ -19,7 +19,7 @@ public class VentaModel {
 
 	@Id
 	@Setter(AccessLevel.PROTECTED)
-	private long idVenta;
+	private int id_venta;
 	
 	private Producto producto;
 	
@@ -29,8 +29,8 @@ public class VentaModel {
 	
 	private LocalDate fecha;
 
-	public VentaModel(long idVenta, Producto producto, int usuario, int cantidad, LocalDate fecha) {
-		this.idVenta= idVenta;
+	public VentaModel(int idVenta, Producto producto, int usuario, int cantidad, LocalDate fecha) {
+		this.id_venta= idVenta;
 		this.producto = producto;
 		this.usuario = usuario;
 		this.cantidad = cantidad;

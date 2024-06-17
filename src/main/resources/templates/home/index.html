@@ -3,8 +3,8 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>STOCK - Control y Pedido</title>
-    <link rel="stylesheet" href="./css/login.css" />
-    <link rel="icon" href="./assets/caja.ico"  type="image/x-icon">
+    <link rel="stylesheet" href="./css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico"  type="image/x-icon">
   </head>
   <body>
     <div class="container container-index">
@@ -12,17 +12,26 @@
         <img src="./assets/caja.png" alt="insertar logo" class="logo" />
         <h1>Bienvenido, <span th:text="${username}"></span>!</h1>
         <div class="button-container">
+
           <div class="button">
-            <a th:href="@{/producto/productos}">Productos</a>  </div>
-          <div class="button">
-            <a th:href="@{/lote/form}">Lote</a>
+            <a th:href="@{/producto/productos}">Productos</a>  
           </div>
+
+          <div class="button">
+            <a th:href="@{/lote/lotes}">Lote</a>
+          </div>
+
           <div class="button">
             <a th:href="@{/pedido/pedidos}">Pedido</a>
           </div>
+
           <div class="button">
             <a th:href="@{/informes}">Informe</a>
           </div>
+          <div class="button">
+            <a th:href="@{/venta/index}">Ventas</a>
+          </div>
+
         </div>
         <button type="submit" class="small-button">Cerrar Sesión</button>
       </form>

@@ -27,12 +27,13 @@ public class ViewRouteHelper {
 	// PEDIDO
 	public final static String PEDIDO_FORM = "pedido/form";
 	public final static String PEDIDO_NEW = "pedido/new";
-	public final static String PEDIDO_INDEX = "pedido/index";
+	public final static String PEDIDO_INDEX = "pedido/pedidos";
+	public final static String PEDIDO_REDIRECT = "redirect:/pedido/pedidos";
 
 	// VENTA
 	public final static String VENTA_FORM = "venta/form";
+	public final static String VENTA_COMPRAS = "venta/compras";
 	public final static String VENTA_INDEX = "venta/index";
 	public final static String VENTA_USUARIO = "/usuario/{usuarioId}";
-
 
 }

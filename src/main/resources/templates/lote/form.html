@@ -1,34 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
+  <head>
     <title>STOCK - Nuevo Lote</title>
-    <link rel="stylesheet" href="../css/login.css" />
-    <link rel="icon" href="../assets/caja.ico" type="image/x-icon">
-</head>
-<body>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+  </head>
+
+  <body>
     <div class="container container-index">
-        <form action="#" th:action="@{new}" th:object="${lote}" method="post">
+      <form action="#" th:action="@{new}" th:object="${lote}" method="post">
+        <a href="../index"
+          ><img src="../assets/caja.png" alt="insertar logo" class="logo" />
+        </a>
+        <h1>Nuevo Lote</h1>
+        <div class="lote-form-container">
+          <p>
+            Cantidad:
+            <input
+              class="lote-input"
+              type="number"
+              th:field="${lote.cantidad}"
+            />
+          </p>
 
-            <a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+          <p>
+            Proveedor:
+            <input
+              class="lote-input"
+              type="text"
+              th:field="${lote.proveedor}"
+            />
+          </p>
+          <p>
+            Precio:
+            <input class="lote-input" type="number" th:field="${lote.precio}" />
+          </p>
 
-            <p>Cantidad: <input type="number" th:field="*{cantidad}" /></p>
-            <p>Proveedor: <input type="text" th:field="*{proveedor}" /></p>
-            <p>Precio: <input type="number" th:field="*{precio}" /></p>
+          <p>
+            Producto:
+            <select th:field="${lote.producto.id_producto}" class="lote-input">
+              <option
+                th:each="producto : ${productos}"
+                th:value="${producto.id_producto}"
+                th:text="${producto.descripcion}"
+              ></option>
+            </select>
+          </p>
+          <p>
+            Pedido:
+            <select th:field="${lote.pedido.id_pedido}" class="lote-input">
+              <option
+                th:each="pedido : ${pedidos}"
+                th:value="${pedido.id_pedido}"
+                th:text="${pedido.producto.descripcion}"
+              ></option>
+            </select>
+          </p>
 
-            <p>Producto: 
-                <select th:field="*{producto.id_producto}">
-                    <option th:each="producto : ${productos}" th:value="${producto.id_producto}" th:text="${producto.descripcion}"></option>
-                </select>
-            </p>
-
-            <p>Pedido Nro: <input type="number" th:field="*{pedido_nro}" /></p>
-
-            <input type="submit" value="Registrar Lote">
-
-            <div class="button-container-producto">
-                <button class="product-button"> <a href="../index" >Volver a la vista principal</a></button>
-            </div>
-        </form>
+          <input type="submit" value="Registrar Lote" class="product-button" />
+          <div class="button-container-producto">
+            <button class="product-button">
+              <a href="../pedido/pedidos">Volver a Pedidos</a>
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
-</body>
+  </body>
 </html>

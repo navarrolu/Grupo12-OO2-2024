@@ -25,23 +25,42 @@ public class RegistrationController {
     @Qualifier("userService")
     private UserService userService;
     
+    
+    /*public RegistrationController (UserService userService){
+        this.userService = userService;
+    }*/
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return ViewRouteHelper.USER_REGISTER;
     }
     @PostMapping("/register")
-    public ModelAndView registerUser(@ModelAttribute("user") User user, 
+    public String registerUser(@ModelAttribute("user") User user, 
                                      @RequestParam("role") String role, 
                                      BindingResult result){
         ModelAndView mV = new ModelAndView();
         if (result.hasErrors()) {
-            mV.setViewName(ViewRouteHelper.USER_REGISTER);
+            return ViewRouteHelper.USER_REGISTER;
         } else {
             userService.saveUserWithRole(user, role);
             mV.addObject("user", new User());
-            mV.setViewName(ViewRouteHelper.INDEX);
+            //mV.setViewName(ViewRouteHelper.INDEX);
+
+            //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            //String username = authentication.getName();
+
+            //traigo el user en forma de entitie
+            //com.unla.grupo12OO22024.entities.User user =  userService.traerPorNombre(username);
+            //traigo el user_role en forma de entitie
+            //Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
+            //UserRole userRole =  userRoleOpcional.get();
+
+            if (role.equalsIgnoreCase("ROLE_ADMIN")) {
+                return "redirect:/" + ViewRouteHelper.INDEX; // Redirecciona a la vista para administradores
+            } else {
+                return "redirect:/" + ViewRouteHelper.VENTA_COMPRAS; // Redirecciona a la vista para usuarios regulares
+            }
         }
-        return mV;
     }
 }

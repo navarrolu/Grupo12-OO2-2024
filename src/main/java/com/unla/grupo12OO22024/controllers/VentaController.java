@@ -14,10 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo12OO22024.entities.Producto;
+import com.unla.grupo12OO22024.entities.Venta;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.models.VentaModel;
-import com.unla.grupo12OO22024.services.implementation.VentaService;
 import com.unla.grupo12OO22024.services.implementation.ProductoService;
+import com.unla.grupo12OO22024.services.implementation.VentaService;
 
 import jakarta.validation.Valid;
 
@@ -38,11 +39,25 @@ public class VentaController {
 		this.productoService = productoService;
 	}
 
+	//se llamaria compras al panel donde el usuario ve sus compras
+	@GetMapping("/compras")
+	public ModelAndView compras() {
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.VENTA_COMPRAS); //cambiar por el del usuario
+		List<Producto> productos = productoService.getAll();
+		List<Venta> ventas = ventaService.getAll();
+		mAV.addObject("productos", productos);
+		mAV.addObject("ventas", ventas);
+		mAV.addObject("venta", new VentaModel());
+		return mAV;
+	}
+
 	@GetMapping("/index")
 	public ModelAndView index() {
-		ModelAndView mAV = new ModelAndView(ViewRouteHelper.VENTA_INDEX);
+		ModelAndView mAV = new ModelAndView(ViewRouteHelper.VENTA_INDEX); //vista de todas las ventas
 		List<Producto> productos = productoService.getAll();
+		List<Venta> ventas = ventaService.getAll();
 		mAV.addObject("productos", productos);
+		mAV.addObject("ventas", ventas);
 		mAV.addObject("venta", new VentaModel());
 		return mAV;
 	}
@@ -64,7 +79,7 @@ public class VentaController {
 			ventaService.insertOrUpdate(venta);
 			mV.addObject("ventas", ventaService.getAll());
 			mV.addObject("venta", new VentaModel());
-			mV.setViewName(ViewRouteHelper.VENTA_INDEX);
+			mV.setViewName(ViewRouteHelper.VENTA_COMPRAS);
 		}
 		return mV;
 	}
