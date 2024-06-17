@@ -24,7 +24,7 @@ public class ViewRouteHelper {
     public final static String LOTE_FORM = "lote/form";
 
     // REDIRECTS
-    public final static String ROUTE_INDEX = "/index";
+    public final static String ROUTE_INDEX = "redirect:/index";
     public final static String DEGREE_ROOT = "/degrees/";
 
 }

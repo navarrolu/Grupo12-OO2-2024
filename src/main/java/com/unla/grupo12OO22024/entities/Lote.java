@@ -1,18 +1,20 @@
 package com.unla.grupo12OO22024.entities;
 
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
-import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,11 +23,12 @@ import lombok.ToString;
 @Entity
 @Table(name = "lote")
 @ToString
+@NoArgsConstructor
 public class Lote {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.PROTECTED)
+    @Column(name = "id_lote", nullable = false)
     private Long id_lote;
 
     @Column(name = "cantidad", nullable = false)
@@ -33,7 +36,7 @@ public class Lote {
     private int cantidad;
 
     @Column(name = "fecha_recepcion")
-    private java.sql.Timestamp fechaRecepcion;
+    private LocalDate fecha_recepcion;
 
 
     @Column(name = "proveedor", nullable = false)
@@ -43,7 +46,7 @@ public class Lote {
     @Column(name = "precio", nullable = false)
     private float precio;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "id_producto", nullable = false)
     private Producto producto;
 
@@ -52,4 +55,11 @@ public class Lote {
     private Long pedido_nro;
 
 
+    // Antes de que una nueva instancia de la entidad se inserte en la base de datos, 
+	// JPA llamará automáticamente a cualquier método anotado con @PrePersist
+    // creditos a Ro!! <3
+	@PrePersist
+	public void prePersist() {
+		this.fecha_recepcion = LocalDate.now(); 
+	}
 }

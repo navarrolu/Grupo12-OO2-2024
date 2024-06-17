@@ -29,7 +29,6 @@ public class ProductoService implements IProductoService {
 
     @Override
     public ProductoModel insertOrUpdate(ProductoModel productoModel) {
-
         Producto producto = productoRepository.save( modelMapper.map(productoModel, Producto.class));
         return modelMapper.map(producto, ProductoModel.class);
     }
@@ -48,18 +47,5 @@ public class ProductoService implements IProductoService {
             return false;
         }
     }
-
-    public Producto traerPorNombre (String nombre){
-        Producto producto = productoRepository.findByDescripcion(nombre);
-        return producto;
-    }
-
-    public ProductoModel convertToModel(Producto producto) {
-        ProductoModel productoModel = modelMapper.map(producto, ProductoModel.class);
-        return productoModel;
-    }
-
-
-
 
 }
