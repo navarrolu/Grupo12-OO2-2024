@@ -16,13 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.unla.grupo12OO22024.entities.Producto;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.models.VentaModel;
-import com.unla.grupo12OO22024.services.implementation.VentaService;
 import com.unla.grupo12OO22024.services.implementation.ProductoService;
+import com.unla.grupo12OO22024.services.implementation.VentaService;
 
 import jakarta.validation.Valid;
 
 @Controller
-@RequestMapping("/venta")
+@RequestMapping("/compra")
 public class VentaController {
 
 	@Qualifier("ventaService")
@@ -38,7 +38,8 @@ public class VentaController {
 		this.productoService = productoService;
 	}
 
-	@GetMapping("/index")
+	//se llamaria compras al panel donde el usuario ve sus compras
+	@GetMapping("/compras")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.VENTA_INDEX);
 		List<Producto> productos = productoService.getAll();

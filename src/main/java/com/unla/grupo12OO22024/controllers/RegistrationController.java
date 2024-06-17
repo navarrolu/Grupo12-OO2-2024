@@ -25,6 +25,11 @@ public class RegistrationController {
     @Qualifier("userService")
     private UserService userService;
     
+    
+    /*public RegistrationController (UserService userService){
+        this.userService = userService;
+    }*/
+
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
