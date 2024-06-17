@@ -10,6 +10,9 @@
     <div class="container">
       <form th:action="@{/loginprocess}" method="post">
         <h1>Iniciar Sesión</h1>
+        <div th:if="${message}" class="alert alert-success">
+          <p th:text="${message}"></p>
+        </div>
         <div class="input-fields">
           <div class="div">
             <input

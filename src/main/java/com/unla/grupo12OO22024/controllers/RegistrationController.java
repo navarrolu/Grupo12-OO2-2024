@@ -56,7 +56,7 @@ public class RegistrationController {
             //Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
             //UserRole userRole =  userRoleOpcional.get();
 
-
+            redirectAttributes.addFlashAttribute("message", "Usuario registrado con éxito");
             if (role.equalsIgnoreCase("ROLE_ADMIN")) {
                 return "redirect:/" + ViewRouteHelper.INDEX; // Redirecciona a la vista para administradores
             } else {
