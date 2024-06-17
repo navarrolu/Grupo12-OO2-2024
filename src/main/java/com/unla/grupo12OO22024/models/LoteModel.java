@@ -1,5 +1,7 @@
 package com.unla.grupo12OO22024.models;
 
+import java.time.LocalDate;
+
 import com.unla.grupo12OO22024.entities.Producto;
 
 import jakarta.persistence.Id;
@@ -24,7 +26,7 @@ public class LoteModel {
 
     private int cantidad;
 
-    private java.sql.Timestamp fechaRecepcion;
+    private LocalDate fecha_recepcion;
 
     @NotBlank
     private String proveedor;
@@ -37,12 +39,13 @@ public class LoteModel {
 
     private Long pedido_nro;
 
-    public LoteModel(Long id_lote, int cantidad, String proveedor, float precio, Producto producto, Long pedido_nro) {
+    public LoteModel(Long id_lote, int cantidad, String proveedor, float precio, Producto producto, Long pedido_nro, LocalDate fecha_recepcion) {
         this.id_lote = id_lote;
         this.cantidad = cantidad;
         this.proveedor = proveedor;
         this.precio = precio;
         this.producto = producto;
         this.pedido_nro = pedido_nro;
+        this.fecha_recepcion = fecha_recepcion;
     }
 }

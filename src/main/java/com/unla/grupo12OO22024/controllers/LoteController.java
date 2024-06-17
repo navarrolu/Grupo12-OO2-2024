@@ -31,9 +31,15 @@ public class LoteController {
     private LoteService loteService;
 
     @Qualifier("productoService")
-    @Autowired
     private ProductoService productoService;
 
+
+    public LoteController(LoteService loteService, ProductoService productoService) {
+		this.loteService = loteService;
+		this.productoService = productoService;
+	}
+
+    
     //obtener la vista del form
     @GetMapping("/form")
     public String lote(Model model) {
@@ -52,9 +58,9 @@ public class LoteController {
             mV.addObject("errorMessage", "Error en los datos del lote.");
         }else{
             loteService.insertOrUpdate(lote);
-            mV.addObject("lotes", loteService.getClass());
+            mV.addObject("productos", productoService.getClass());
             mV.addObject("lote", new LoteModel());
-            mV.setViewName(ViewRouteHelper.INDEX);
+            mV.setViewName(ViewRouteHelper.ROUTE_INDEX);
         }
         return mV;
     }

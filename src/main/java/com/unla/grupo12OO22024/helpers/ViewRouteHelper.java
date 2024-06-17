@@ -19,6 +19,11 @@ public class ViewRouteHelper {
 	public final static String LOTE_NEW = "lote/new";
 	public final static String LOTE_FORM = "lote/form";
 
+
+    // REDIRECTS
+    public final static String ROUTE_INDEX = "redirect:/index";
+    public final static String DEGREE_ROOT = "/degrees/";
+
 	// PEDIDO
 	public final static String PEDIDO_FORM = "pedido/form";
 	public final static String PEDIDO_NEW = "pedido/new";
@@ -28,8 +33,6 @@ public class ViewRouteHelper {
 	public final static String VENTA_FORM = "venta/form";
 	public final static String VENTA_INDEX = "venta/index";
 	public final static String VENTA_USUARIO = "/usuario/{usuarioId}";
-	// REDIRECTS
-	public final static String ROUTE_INDEX = "/index";
-	public final static String DEGREE_ROOT = "/degrees/";
+
 
 }
