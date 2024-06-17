@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 
 
@@ -29,9 +30,11 @@ public class User {
     @Column(name = "id_usuario")
     private Long id;
 
+    @NotEmpty(message = "El nombre de usuario es obligatorio")
     @Column(name = "username", unique = true, nullable = false, length = 45)
     private String username;
 
+    @NotEmpty(message = "La contraseña es obligatoria")
     @Column(name = "password", nullable = false, length = 60)
     private String password;
 
