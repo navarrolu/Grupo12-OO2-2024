@@ -57,16 +57,14 @@ public class ProductoController {
         return  mV;
     }
 
-    @GetMapping("/{id_producto}")
-    public ModelAndView getById( @PathVariable long id_producto) {
-        ProductoModel productoModel = productoService.getById(id_producto);
-        System.out.printf("%s", productoModel);
-        ModelAndView mV = new ModelAndView();
-        mV.addObject("producto", productoModel);
-        mV.setViewName( ViewRouteHelper.PRODUCTO_NEW);
-        return  mV;
-    }
-
-
+	@GetMapping("/{id_producto}")
+	public ModelAndView getById(@PathVariable long id_producto) {
+		ProductoModel productoModel = productoService.getById(id_producto);
+		System.out.printf("%s", productoModel);
+		ModelAndView mV = new ModelAndView();
+		mV.addObject("producto", productoModel);
+		mV.setViewName(ViewRouteHelper.PRODUCTO_NEW);
+		return mV;
+	}
 
 }
