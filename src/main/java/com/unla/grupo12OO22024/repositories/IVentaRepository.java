@@ -8,9 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.unla.grupo12OO22024.entities.Venta;
 
+// Indica que esta interfaz es un componente de "ventaRepository"
 @Repository("ventaRepository")
 public interface IVentaRepository extends JpaRepository<Venta, Serializable> {
 
-	List<Venta> findByUsuario(int usuario);
-	
+	// Método para buscar ventas por ID de usuario
+	List<Venta> findByUsuarioId(Long idUsuario);
+
 }

@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,14 +25,18 @@ public class Producto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_producto;
 
-
-
     @Column(name = "descripcion", nullable = false)
     private  String descripcion;
+    
+    @Column(name = "precio_base", nullable = false)
+    private float precio_base;
+    
     @Column(name = "precio_total", nullable = false)
     private float precio_total;
+    
     @Column(name = "stock", nullable = false)
     private int stock;
+    
     @Column(name = "stock_minimo", nullable = false)
     private int stock_minimo;
 

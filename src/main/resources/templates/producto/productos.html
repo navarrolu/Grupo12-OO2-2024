@@ -16,7 +16,8 @@
           <thead>
             <tr>
               <th>Nombre</th>
-              <th>Precio</th>
+			  <th>Precio Base</th>
+              <th>Precio de Venta</th>
               <th>Stock</th>
               <th>Stock Mínimo</th>
             </tr>
@@ -24,6 +25,7 @@
           <tbody>
             <tr th:each="producto : ${productos}">
               <td><span th:text="${producto.descripcion}"></span></td>
+			  <td><span th:text ="${producto.precio_base}"></span></td>
               <td><span th:text="${producto.precio_total}"></span></td>
               <td><span th:text="${producto.stock}"></span></td>
               <td><span th:text="${producto.stock_minimo}"></span></td>

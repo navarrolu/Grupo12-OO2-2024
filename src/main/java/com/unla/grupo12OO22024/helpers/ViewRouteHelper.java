@@ -18,22 +18,20 @@ public class ViewRouteHelper {
 	public final static String LOTE_NEW = "lote/new"; //post de lote
 	public final static String LOTE_FORM = "lote/form"; //vista registro nuevo lote
 
-
-    // REDIRECTS
-    public final static String ROUTE_INDEX = "redirect:/index"; //login redirect para admin
-	public final static String ROUTE_USER = "redirect:/venta/compras"; //login redirect de usuario
-
-	// PEDIDO
+	// PEDIDO - Rocio
 	public final static String PEDIDO_FORM = "pedido/form";
 	public final static String PEDIDO_NEW = "pedido/new";
 	public final static String PEDIDO_INDEX = "pedido/pedidos";
 	public final static String PEDIDO_REDIRECT = "redirect:/pedido/pedidos";
 
-	// VENTA
+	// VENTA - Rocio
 	public final static String VENTA_FORM = "venta/form";
 	public final static String VENTA_COMPRAS = "venta/compras";
 	public final static String VENTA_INDEX = "venta/index";
-	public final static String VENTA_USUARIO = "/usuario/{usuarioId}";
+	public final static String VENTA_STOCK = "venta/stock";
 
-
+ // REDIRECTS
+  public final static String ROUTE_INDEX = "redirect:/index"; //login redirect para admin
+	public final static String ROUTE_USER = "redirect:/venta/compras"; //login redirect de usuario
+	
 }

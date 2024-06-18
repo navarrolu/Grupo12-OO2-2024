@@ -17,9 +17,6 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotEmpty;
 
-
-
-
 @Entity
 @Table(name = "user")
 public class User {

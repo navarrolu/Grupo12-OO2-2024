@@ -71,5 +71,4 @@ public class UserController {
             return  ViewRouteHelper.ROUTE_USER; // Redirecciona a la vista para usuarios regulares
         }
     }
-
 }

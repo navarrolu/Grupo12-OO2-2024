@@ -14,23 +14,27 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class ProductoModel {
-        @Id
-        @Setter(AccessLevel.PROTECTED)
-        private Long id_producto;
-        @NotBlank
-        private  String descripcion;
-        @Min(0)
-        private float precio_total;
-        @Min(0)
-        private int stock;
-        @Min(0)
-        private int stock_minimo;
+	@Id
+	@Setter(AccessLevel.PROTECTED)
+	private Long id_producto;
+	@NotBlank
+	private String descripcion;
+	@Min(0)
+	private float precio_base;
+	@Min(0)
+	private float precio_total;
+	@Min(0)
+	private int stock;
+	@Min(0)
+	private int stock_minimo;
 
-    public ProductoModel(Long id_producto, String descripcion, float precio_total, int stock, int stock_minimo) {
-        this.id_producto = id_producto;
-        this.descripcion = descripcion;
-        this.precio_total = precio_total;
-        this.stock = stock;
-        this.stock_minimo = stock_minimo;
-    }
+	public ProductoModel(Long id_producto, String descripcion, float precio_base, float precio_total, int stock,
+			int stock_minimo) {
+		this.id_producto = id_producto;
+		this.descripcion = descripcion;
+		this.precio_base = precio_base;
+		this.precio_total = precio_total;
+		this.stock = stock;
+		this.stock_minimo = stock_minimo;
+	}
 }
