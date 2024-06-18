@@ -65,6 +65,7 @@ public class UserController {
 
         //verifico si el rol de la entitie de user_role asignada al user es admin o user
         if (userRole.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
+        
             return ViewRouteHelper.ROUTE_INDEX; // Redirecciona a la vista para administradores
         } else {
             return  ViewRouteHelper.ROUTE_USER; // Redirecciona a la vista para usuarios regulares
