@@ -64,6 +64,8 @@ CREATE TABLE `venta` (
   KEY `fk_venta_idx` (`id_producto`),
   CONSTRAINT `fk_venta_producto` FOREIGN KEY (`id_producto`)
   REFERENCES `producto` (`id_producto`),
-  CONSTRAINT `fk_venta_usuario` FOREIGN KEY (`id_usuario`)
+  CONSTRAINT `fk_venta_user` FOREIGN KEY (`id_usuario`)
   REFERENCES `user` (`id_usuario`) 
 );
+
+

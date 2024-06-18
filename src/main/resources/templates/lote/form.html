@@ -14,41 +14,10 @@
         </a>
         <h1>Nuevo Lote</h1>
         <div class="lote-form-container">
-          <p>
-            Cantidad:
-            <input
-              class="lote-input"
-              type="number"
-              th:field="${lote.cantidad}"
-            />
-          </p>
 
-          <p>
-            Proveedor:
-            <input
-              class="lote-input"
-              type="text"
-              th:field="${lote.proveedor}"
-            />
-          </p>
-          <p>
-            Precio:
-            <input class="lote-input" type="number" th:field="${lote.precio}" />
-          </p>
-
-          <p>
-            Producto:
-            <select th:field="${lote.producto.id_producto}" class="lote-input">
-              <option
-                th:each="producto : ${productos}"
-                th:value="${producto.id_producto}"
-                th:text="${producto.descripcion}"
-              ></option>
-            </select>
-          </p>
           <p>
             Pedido:
-            <select th:field="${lote.pedido.id_pedido}" class="lote-input">
+            <select th:field="${lote.pedido}" class="lote-input">
               <option
                 th:each="pedido : ${pedidos}"
                 th:value="${pedido.id_pedido}"
@@ -60,7 +29,7 @@
           <input type="submit" value="Registrar Lote" class="product-button" />
           <div class="button-container-producto">
             <button class="product-button">
-              <a href="../pedido/pedidos">Volver a Pedidos</a>
+              <a href="../lote/lotes">Volver a Lotes</a>
             </button>
           </div>
         </div>

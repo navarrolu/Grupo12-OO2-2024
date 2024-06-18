@@ -5,62 +5,63 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.unla.grupo12OO22024.entities.User;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.services.implementation.UserService;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @Controller
 @RequiredArgsConstructor
 public class RegistrationController {
 
+    //Lu
+    //Si bien en el TFI se menciona que ya no es necesaria la anotacion de autowired
+    //Si la quito ya no funciona jaja
     @Autowired
     @Qualifier("userService")
     private UserService userService;
     
-    
-    /*public RegistrationController (UserService userService){
-        this.userService = userService;
-    }*/
 
+    //vista del form de registro
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return ViewRouteHelper.USER_REGISTER;
     }
+
+    //Lu:
+    //Para el metodo POST traigo el parametro role en un string
+    //para usarlo en el save user
     @PostMapping("/register")
-    public String registerUser(@ModelAttribute("user") User user, 
-                                     @RequestParam("role") String role, 
-                                     BindingResult result){
-        ModelAndView mV = new ModelAndView();
+    public String registerUser(@Valid @ModelAttribute("user") User user,
+                                 @RequestParam("role") String role,
+                                 BindingResult result) {
         if (result.hasErrors()) {
             return ViewRouteHelper.USER_REGISTER;
-        } else {
-            userService.saveUserWithRole(user, role);
-            mV.addObject("user", new User());
-            //mV.setViewName(ViewRouteHelper.INDEX);
-
-            //Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            //String username = authentication.getName();
-
-            //traigo el user en forma de entitie
-            //com.unla.grupo12OO22024.entities.User user =  userService.traerPorNombre(username);
-            //traigo el user_role en forma de entitie
-            //Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
-            //UserRole userRole =  userRoleOpcional.get();
-
-            if (role.equalsIgnoreCase("ROLE_ADMIN")) {
-                return "redirect:/" + ViewRouteHelper.INDEX; // Redirecciona a la vista para administradores
-            } else {
-                return "redirect:/" + ViewRouteHelper.VENTA_COMPRAS; // Redirecciona a la vista para usuarios regulares
-            }
         }
+
+    
+        //Verifico que el username que ingreso el usuario a registrarse
+        //me retorne null, sino, recchazo el post
+        if (userService.traerPorNombre(user.getUsername()) != null) {
+            result.addError(new FieldError("user", "username", "El nombre de usuario ya existe"));
+            return ViewRouteHelper.USER_REGISTER;
+        }
+        
+        //llamo al save en userService para guardar en la bdd al user
+        userService.saveUserWithRole(user, role);
+    
+        //junto con el equipo no encontramos la manera debido a los tiempos
+        //para mostrar un mensaje en el login de registro exitoso, sin embargo
+        //el registro exitoso redirije al login
+        return "redirect:/login"; 
     }
 }

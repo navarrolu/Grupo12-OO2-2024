@@ -57,34 +57,34 @@ public class UserService implements UserDetailsService {
 		return new ArrayList<>(grantedAuthorities);
 	}
 
-    /*public com.unla.grupo12OO22024.entities.User saveUser( com.unla.grupo12OO22024.entities.User user, String role) {
-        user.setPassword(user.getPassword());
-        user.setEnabled(true);  //habilitar el usuario
-		UserRole userRole = new UserRole();
-        userRole.setUser(user);
-        userRole.setRole(role);
-        userRoleRepository.save(userRole);
-        return userRepository.save(user);
-    } //revisar*/
-
+	//Guarda el usuario en la base de datos
 	@Transactional
     public void saveUserWithRole(com.unla.grupo12OO22024.entities.User user, String role) {
+		//seteo la contraseña llamando al encoder (bcrypt)
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-		//user.setPassword(user.getPassword());
+		//seteo el estado en true (habilitado)
 		user.setEnabled(true);
+		//salvo el user
         userRepository.save(user);
 
+		//creo un entitie de user role 
         UserRole userRole = new UserRole();
+		//seteo el rol que eligio el usuario
         userRole.setRole(role);
+		//seteo el user (foreign key en la bdd)
         userRole.setUser(user);
+		//salvo el registro
         userRoleRepository.save(userRole);
     }
 
+	//recibe un nickname y devuelve la entidad completa con ese nombre
     public com.unla.grupo12OO22024.entities.User traerPorNombre(String username) {
         com.unla.grupo12OO22024.entities.User user = userRepository.findByUsernameAndFetchUserRolesEagerly(username);
 		return user;
     }
 
+	//recibe un id y retorna la entitie con ese id
+	//aclaracion, el id de user y de user_role siempre es el mismo 
 	public Optional<UserRole> traerUserRole(Long id) {
 		Optional<UserRole> userRole = userRoleRepository.findById(id);
 		return userRole;

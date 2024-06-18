@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
 	<title>STOCK - Nuevo Pedido</title>
 	<link rel="stylesheet" href="../css/styles2.css" />
 	<link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
 	<script>
-		// Function to update the total
+		// Funcion para actualizar el total
 		function updateTotal() {
 			var productoSelect = document.getElementById("producto");
 			var selectedOption = productoSelect.options[productoSelect.selectedIndex];
 			var precioBase = selectedOption.getAttribute("data-precio");
 			var cantidad = document.getElementById("cantidad").value;
 
-			// Calculate the total
+			// Calcular el total
 			var total = 0;
 			if (precioBase && cantidad) {
 				total = parseFloat(precioBase) * parseInt(cantidad);
 			}
 
-			// Display the total
+			// Mostrar el total
 			document.getElementById("totalDisplay").innerText = "Total: " + total.toFixed(2);
 		}
 		// 1- Obtiene la opción seleccionada: Encuentra el elemento seleccionado del "<select>".
@@ -30,7 +29,7 @@
 	</script>
 
 </head>
-
+ 
 <body>
 	<div class="container container-index">
 		<form action="#" th:action="@{new}" th:object="${pedido}" method="post">

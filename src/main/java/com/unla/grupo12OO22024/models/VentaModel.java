@@ -20,7 +20,7 @@ public class VentaModel {
 
 	@Id
 	@Setter(AccessLevel.PROTECTED)
-	private int id_venta;
+	private long id_venta;
 	
 	private Producto producto;
 	

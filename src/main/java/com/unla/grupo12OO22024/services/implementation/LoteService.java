@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.unla.grupo12OO22024.entities.Lote;
+import com.unla.grupo12OO22024.entities.Pedido;
 import com.unla.grupo12OO22024.entities.Producto;
 import com.unla.grupo12OO22024.models.LoteModel;
 import com.unla.grupo12OO22024.repositories.ILoteRepository;
+import com.unla.grupo12OO22024.repositories.IPedidoRepository;
 import com.unla.grupo12OO22024.repositories.IProductoRepository;
 import com.unla.grupo12OO22024.services.ILoteService;
 
@@ -27,40 +29,57 @@ public class LoteService implements ILoteService{
 
     private IProductoRepository productoRepository;
 
+    private IPedidoRepository pedidoRepository;
 
-    public LoteService(ILoteRepository loteRepository, IProductoRepository productoRepository) {
+
+    public LoteService(ILoteRepository loteRepository, IProductoRepository productoRepository, IPedidoRepository pedidoRepository) {
 		this.loteRepository = loteRepository;
         this.productoRepository = productoRepository;
+        this.pedidoRepository = pedidoRepository;
 	}
 
+    //llamar a todos los lotes en una lista para luego ser usada en la vista del html
     @Override
 	public List<Lote> getAll() {
 		return loteRepository.findAll();
 	}
 	
 
-
+    //guardar el lote del form
     @Transactional
     public LoteModel insertOrUpdate(LoteModel loteModel) {
-
-        Optional<Producto> optionalProducto = productoRepository.findById(loteModel.getProducto().getId_producto());
-        Producto producto = optionalProducto.get();
-
-        //convertir a entidad
+        
+        //convertir el modelo de lote a entidad
         Lote lote = modelMapper.map(loteModel, Lote.class);
 
+        //consigo el id del pedido que contiene el lote
+        long id_pedido = loteModel.getPedido().getId_pedido();
+        
+        //busco el registror de la base de datos que contiene ese id
+        Optional<Pedido> pedido = pedidoRepository.findById(id_pedido);
 
-        //calcular nuevo stock
-        producto.setStock(producto.getStock() + loteModel.getCantidad());
-        productoRepository.save(producto);
+        //pregunto si lo logro encontrar
+        if(pedido.isPresent()){
+            //paso el pedido optional a una entidad pedido
+            Pedido pedidoEntitie =  pedido.get();
 
-        //guardar lote
-        lote = loteRepository.save(lote);
+            //seteo en mi entidad lote la entidad pedido
+            lote.setPedido(pedidoEntitie);
 
-        //pasar a modelo 
+            // Crear el nuevo lote
+            loteRepository.save(lote);
+ 
+            //en una entidad producto alojo el producto de la entidad pedido
+            Producto producto = pedidoEntitie.getProducto();
+            
+            //actualizar el stock del producto
+            producto.setStock(producto.getStock() + pedidoEntitie.getCantidad());
+
+            //actualizo mi producto con su nuevo stock
+            productoRepository.save(producto);
+        }
         return modelMapper.map(lote, LoteModel.class);
+        
     }
-
-
 
 }
