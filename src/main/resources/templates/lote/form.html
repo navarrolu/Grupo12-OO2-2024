@@ -17,7 +17,7 @@
 
           <p>
             Pedido:
-            <select th:field="${lote.pedido.id_pedido}" class="lote-input">
+            <select th:field="${lote.pedido}" class="lote-input">
               <option
                 th:each="pedido : ${pedidos}"
                 th:value="${pedido.id_pedido}"
@@ -29,7 +29,7 @@
           <input type="submit" value="Registrar Lote" class="product-button" />
           <div class="button-container-producto">
             <button class="product-button">
-              <a href="../pedido/pedidos">Volver a Pedidos</a>
+              <a href="../lote/lotes">Volver a Lotes</a>
             </button>
           </div>
         </div>

@@ -10,7 +10,6 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -49,7 +48,7 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
 
@@ -65,8 +64,6 @@ public class User {
 
     public User() {
     }
-    
-
 
     public Long getId() {
         return this.id;

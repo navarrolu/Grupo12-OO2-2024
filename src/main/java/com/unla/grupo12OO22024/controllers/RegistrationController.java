@@ -22,34 +22,46 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RegistrationController {
 
+    //Lu
+    //Si bien en el TFI se menciona que ya no es necesaria la anotacion de autowired
+    //Si la quito ya no funciona jaja
     @Autowired
     @Qualifier("userService")
     private UserService userService;
     
+
+    //vista del form de registro
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
         model.addAttribute("user", new User());
         return ViewRouteHelper.USER_REGISTER;
     }
+
+    //Lu:
+    //Para el metodo POST traigo el parametro role en un string
+    //para usarlo en el save user
     @PostMapping("/register")
     public String registerUser(@Valid @ModelAttribute("user") User user,
                                  @RequestParam("role") String role,
                                  BindingResult result) {
-
         if (result.hasErrors()) {
-            // Validation errors
             return ViewRouteHelper.USER_REGISTER;
         }
 
+    
+        //Verifico que el username que ingreso el usuario a registrarse
+        //me retorne null, sino, recchazo el post
         if (userService.traerPorNombre(user.getUsername()) != null) {
-            // Username already exists
             result.addError(new FieldError("user", "username", "El nombre de usuario ya existe"));
             return ViewRouteHelper.USER_REGISTER;
         }
-
+        
+        //llamo al save en userService para guardar en la bdd al user
         userService.saveUserWithRole(user, role);
-        // Registration successful (optionally redirect to a success page)
-
-        return "redirect:/login"; // Redirect to login after successful registration
+    
+        //junto con el equipo no encontramos la manera debido a los tiempos
+        //para mostrar un mensaje en el login de registro exitoso, sin embargo
+        //el registro exitoso redirije al login
+        return "redirect:/login"; 
     }
 }

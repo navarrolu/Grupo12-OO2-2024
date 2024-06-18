@@ -38,42 +38,48 @@ public class LoteService implements ILoteService{
         this.pedidoRepository = pedidoRepository;
 	}
 
+    //llamar a todos los lotes en una lista para luego ser usada en la vista del html
     @Override
 	public List<Lote> getAll() {
 		return loteRepository.findAll();
 	}
 	
 
-
+    //guardar el lote del form
     @Transactional
     public LoteModel insertOrUpdate(LoteModel loteModel) {
         
-        //convertir a entidad
+        //convertir el modelo de lote a entidad
         Lote lote = modelMapper.map(loteModel, Lote.class);
 
-        Optional<Pedido> pedido = pedidoRepository.findById(loteModel.getPedido().getId_pedido());
-        if(pedido != null){
-            Pedido pedidoEntitie =  pedido.get();
-            lote.setPedido(pedidoEntitie);
-            if(loteModel.getPedido().getProducto() !=null){
-                Optional<Producto> optionalProducto = productoRepository.findById(pedidoEntitie.getProducto().getId_producto());
-                //Optional<Producto> optionalProducto = productoRepository.findById(loteModel.getPedido().getProducto().getId_producto());
-                Producto producto = optionalProducto.get();
-                producto.setStock(producto.getStock() + pedidoEntitie.getProducto().getStock());
-                productoRepository.save(producto);
+        //consigo el id del pedido que contiene el lote
+        long id_pedido = loteModel.getPedido().getId_pedido();
+        
+        //busco el registror de la base de datos que contiene ese id
+        Optional<Pedido> pedido = pedidoRepository.findById(id_pedido);
 
-                 //guardar lote
-                lote = loteRepository.save(lote);
-                //pasar a modelo 
-            }
+        //pregunto si lo logro encontrar
+        if(pedido.isPresent()){
+            //paso el pedido optional a una entidad pedido
+            Pedido pedidoEntitie =  pedido.get();
+
+            //seteo en mi entidad lote la entidad pedido
+            lote.setPedido(pedidoEntitie);
+
+            // Crear el nuevo lote
+            loteRepository.save(lote);
+ 
+            //en una entidad producto alojo el producto de la entidad pedido
+            Producto producto = pedidoEntitie.getProducto();
+            
+            //actualizar el stock del producto
+            producto.setStock(producto.getStock() + pedidoEntitie.getCantidad());
+
+            //actualizo mi producto con su nuevo stock
+            productoRepository.save(producto);
         }
         return modelMapper.map(lote, LoteModel.class);
-   
-       
-
         
     }
-
-
 
 }
