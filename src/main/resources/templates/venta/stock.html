@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>STOCK - Nuevo Pedido</title>
+	<link rel="stylesheet" href="../css/styles2.css" />
+	<link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+	<style>
+		.error-message {
+			font-size: 30px;
+			font-weight: bold;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container container-index">
+		<form action="#" th:action="@{/new}" th:object="${venta}" method="post">
+			<!-- Resto del formulario -->
+
+			<div th:if="${errorMessage}" class="error-message">
+				<p th:text="${errorMessage}"></p>
+			</div>
+
+			<div class="button-container-producto">
+				<button class="product-button" type="button" onclick="window.history.back();">Volver</button>
+			</div>
+		</form>
+	</div>
+</body>
+
+</html>

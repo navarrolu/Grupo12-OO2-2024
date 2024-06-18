@@ -18,46 +18,43 @@ import com.unla.grupo12OO22024.services.implementation.UserService;
 @Controller
 public class UserController {
 
-    @Autowired
-    @Qualifier("userService")
-    private UserService userService;
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
 
-    
-    public UserController (UserService userService){
-        this.userService = userService;
-    }
+	public UserController(UserService userService) {
+		this.userService = userService;
+	}
 
+	@GetMapping("/login")
+	public String login(Model model, @RequestParam(name = "error", required = false) String error,
+			@RequestParam(name = "logout", required = false) String logout) {
+		model.addAttribute("error", error);
+		model.addAttribute("logout", logout);
+		return ViewRouteHelper.USER_LOGIN;
+	}
 
-    @GetMapping("/login")
-    public String login(Model model,
-                        @RequestParam(name="error", required=false) String error,
-                        @RequestParam(name="logout", required=false) String logout) {
-        model.addAttribute("error", error);
-        model.addAttribute("logout", logout);
-        return ViewRouteHelper.USER_LOGIN;
-    }
+	@GetMapping("/logout")
+	public String logout(Model model) {
+		return ViewRouteHelper.USER_LOGOUT;
+	}
 
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        return ViewRouteHelper.USER_LOGOUT;
-    }
+	@GetMapping("/loginsuccess")
+	public String loginCheck() {
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String username = authentication.getName();
 
-    @GetMapping("/loginsuccess")
-    public String loginCheck() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
+		// traigo el user en forma de entitie
+		com.unla.grupo12OO22024.entities.User user = userService.traerPorNombre(username);
+		// traigo el user_role en forma de entitie
+		Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
+		UserRole userRole = userRoleOpcional.get();
 
-        //traigo el user en forma de entitie
-        com.unla.grupo12OO22024.entities.User user =  userService.traerPorNombre(username);
-        //traigo el user_role en forma de entitie
-        Optional<UserRole> userRoleOpcional = userService.traerUserRole(user.getId());
-        UserRole userRole =  userRoleOpcional.get();
-
-        if (userRole.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
-            return "redirect:/index"; // Redirecciona a la vista para administradores
-        } else {
-            return "redirect:/" + ViewRouteHelper.VENTA_COMPRAS; // Redirecciona a la vista para usuarios regulares
-        }
-    }
+		if (userRole.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
+			return ViewRouteHelper.ROUTE_INDEX; // Redirecciona a la vista para administradores
+		} else {
+			return ViewRouteHelper.ROUTE_USER; // Redirecciona a la vista para usuarios regulares
+		}
+	}
 
 }

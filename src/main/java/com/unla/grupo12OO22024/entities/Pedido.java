@@ -17,13 +17,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;;
 
-@Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+@Entity // se mapea a una tabla en la base de datos
+@Getter // Genera automaticamente los metodos getter de la clase
+@Setter // Genera automaticamente los metodos setter de la clase
+@ToString // Genera automaticamente el metodo toString de la clase
+@NoArgsConstructor // Genera automáticamente un constructor sin argumentos
 @Table(name = "pedido")
 public class Pedido {
+
+	// Rocio
+	/*
+	 * Mapeo con tablas de la base de datos
+	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,9 @@ public class Pedido {
 
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
+
+	@Column(name = "total", nullable = false)
+	private float total;
 
 	@Column(name = "fecha", nullable = false)
 	private LocalDate fecha;

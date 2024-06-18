@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>STOCK - Compras</title>
-    <link rel="stylesheet" href="../css/styles2.css" />
-    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
-  </head>
-  <body>
-    <div class="container container-index">
-      <form th:action="@{/logout}" method="post">
-        <a href="#"
-          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
-        /></a>
-        <h1>Compras</h1>
-        <table class="product-table">
-          <thead>
-            <tr>
-              <th>Nombre del Producto</th>
-              <th>Cantidad</th>
-              <th>Total</th>
-              <th>Fecha</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr th:each="venta : ${ventas}">
-              <td><span th:text="${venta.producto.descripcion}"></span></td>
-              <td><span th:text="${venta.cantidad}"></span></td>
-              <td><span th:text="${venta.total}"></span></td>
-              <td>
-                <span
-                  th:text="${#temporals.format(venta.fecha, 'dd/MM/yyyy')}"
-                ></span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div class="button-container-producto">
-          <button class="product-button">
-            <a href="../venta/form">Nueva Compra </a>
-          </button>
-        </div>
-        <button type="submit" class="small-button">Cerrar Sesión</button> 
-      </form>
-    </div>
-  </body>
+
+<head>
+	<title>STOCK - Compras</title>
+	<link rel="stylesheet" href="../css/styles2.css" />
+	<link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+</head>
+
+<body>
+	<div class="container container-index">
+		<form th:action="@{/logout}" method="post">
+			<a href="#"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+			<h1>Compras</h1>
+			<table class="product-table">
+				<thead>
+					<tr>
+						<th>Nombre del Producto</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+						<th>Fecha</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="venta : ${ventas}">
+						<td><span th:text="${venta.producto.descripcion}"></span></td>
+						<td><span th:text="${venta.cantidad}"></span></td>
+						<td><span th:text="${venta.total}"></span></td>
+						<td>
+							<span th:text="${#temporals.format(venta.fecha, 'dd/MM/yyyy')}"></span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="button-container-producto">
+				<button class="product-button">
+					<a href="../venta/form">Nueva Compra </a>
+				</button>
+			</div>
+			<button type="submit" class="small-button">Cerrar Sesión</button>
+		</form>
+	</div>
+</body>
+
 </html>

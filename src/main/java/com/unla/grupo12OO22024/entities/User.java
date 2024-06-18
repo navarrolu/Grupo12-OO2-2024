@@ -17,9 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
-
-
-
 @Entity
 @Table(name = "user")
 public class User {
@@ -63,8 +60,6 @@ public class User {
     public User() {
     }
     
-
-
     public Long getId() {
         return this.id;
     }

@@ -89,6 +89,5 @@ public class UserService implements UserDetailsService {
 		Optional<UserRole> userRole = userRoleRepository.findById(id);
 		return userRole;
 	}
-
 	
 }
