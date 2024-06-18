@@ -46,9 +46,10 @@ public class LoteController {
 	}
 
     
-    //obtener la vista del form
+    //obtener la vista del form para registrar un lote
     @GetMapping("/form")
     public String lote(Model model) {
+        //se llama al listado de productos y pedidos
         List<Producto> productos = productoService.getAll();
         List<Pedido> pedidos = pedidoService.getAll();
         model.addAttribute("productos", productos);
@@ -57,14 +58,18 @@ public class LoteController {
         return ViewRouteHelper.LOTE_FORM;
     }
 
+    //post para registrar un lote
     @PostMapping("/new")
     public ModelAndView registerLote(@Valid @ModelAttribute("lote") LoteModel lote,
-                                     BindingResult result) {
+                                    BindingResult result) {
         ModelAndView mV = new ModelAndView();
+        //comprueba si hay algun error de validacion con el objeto loteModel
         if (result.hasErrors()) {
-            mV.setViewName(ViewRouteHelper.LOTE_FORM);
             mV.addObject("errorMessage", "Error en los datos del lote.");
+            mV.setViewName(ViewRouteHelper.LOTE_FORM);
+            //si los hay entonces dirijo de nuevo al formulario de registro de lote
         }else{
+            //si no hay errores guardo el lote
             loteService.insertOrUpdate(lote);
             mV.addObject("productos", productoService.getClass());
             mV.addObject("pedidos", pedidoService.getClass());
@@ -74,6 +79,7 @@ public class LoteController {
         return mV;
     }
 
+    //vista de todos los lotes registrados
     @GetMapping("/lotes")
     public ModelAndView index( ){
         ModelAndView mV = new ModelAndView( ViewRouteHelper.LOTE);

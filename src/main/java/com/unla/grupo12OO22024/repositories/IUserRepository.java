@@ -10,7 +10,8 @@ import com.unla.grupo12OO22024.entities.User;
 
 @Repository("userRepository")
 public interface IUserRepository extends JpaRepository<User, Long> {
-    
+     
+    //Consulta a la bdd de user con user_role por username
     @Query("SELECT u FROM User u JOIN FETCH u.userRoles WHERE u.username = (:username)")
     public abstract User findByUsernameAndFetchUserRolesEagerly(@Param("username") String username);
     

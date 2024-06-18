@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <title>STOCK - Nuevo Pedido</title>
+    <link rel="stylesheet" href="../../static/css/styles2.css" />
     <link rel="stylesheet" href="../css/styles2.css" />
     <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
   </head>
@@ -40,14 +41,12 @@
           <p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">
             Cantidad error
           </p>
-
           <p>
             Fecha: <input class="lote-input" type="date" th:field="*{fecha}" />
           </p>
           <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
             Fecha error
           </p>
-
           <p>
             Proveedor:
             <input class="lote-input" type="text" th:field="*{proveedor}" />
