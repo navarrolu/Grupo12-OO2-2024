@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Productos</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container container-index">
+      <form>
+        <a href="../index"
+          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
+        /></a>
+        <h1>Productos</h1>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th hidden >id</th>
+              <th>Nombre</th>
+              <th>Precio</th>
+              <th>Stock</th>
+              <th>Stock Mínimo</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="producto : ${productos}">
+              <!--<td><span th:text="${producto.id_producto}"></span></td> -->
+              <td><span th:text="${producto.descripcion}"></span></td>
+              <td><span th:text="${producto.precio_total}"></span></td>
+              <td><span th:text="${producto.stock}"></span></td>
+              <td><span th:text="${producto.stock_minimo}"></span></td>
+
+              <td>
+                <a th:href ="@{'delete/' + ${producto.id_producto} }" class="btn btn-success">
+                  ELIMiNAR
+                </a>
+                <a th:href ="@{'edit/'+${producto.id_producto}}" class="btn btn-success">
+                  EDITAR
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="button-container-producto">
+          <button class="product-button">
+            <a href="../producto/form">Nuevo Producto</a>
+          </button>
+          <button class="product-button">Editar Producto</button>
+          <!--<button class="product-button">Eliminar Producto</button>-->
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

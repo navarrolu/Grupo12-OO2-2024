@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+</head>
+
+<body>
+	<h1>~ ¡Gracias por comprar con nostros! ~</h1>
+	<form action="#" th:action="@{index}" th:object="${venta}" method="post">
+
+		<div class="table-container">
+			<table>
+				<thead>
+					<tr>
+						<th>ID</th>
+						<th>Producto</th>
+						<th>Cantidad</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="venta : ${ventas}">
+						<td><span th:text="${venta.idVenta}" /></td>
+						<td><span th:text="${venta.producto.descripcion}" /></td>
+						<td><span th:text="${venta.cantidad}" /></td>
+						<td><span th:text="${venta.total}" /></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
+		<div class="button-container">
+			<button type="button">Volver al inicio</button>
+		</div>
+	</form>
+</body>
+
+</html>

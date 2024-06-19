@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Ventas</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container container-index">
+      <form>
+        <a href="../index"
+          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
+        /></a>
+        <h1>Compras</h1>
+        <table class="product-table">
+          <thead>
+            <tr>
+			  <th>ID Venta</th>
+              <th>Producto</th>
+              <th>Cantidad</th>
+              <th>Total</th>
+              <th>Fecha</th>
+			  <th>ID Usuario</th>
+			  <th>Nombre Usuario</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="venta : ${ventas}">
+			  <td><span th:text="${venta.id_venta}"></span></td>
+              <td><span th:text="${venta.producto.descripcion}"></span></td>
+              <td><span th:text="${venta.cantidad}"></span></td>
+              <td><span th:text="${venta.total}"></span></td>
+              <td>
+                <span
+                  th:text="${#temporals.format(venta.fecha, 'dd/MM/yyyy')}"
+                ></span>
+              </td>
+			  <td><span th:text="${venta.usuario}"></span></td>
+			  <!-- <td><span th:text="${venta.usuario.id_usuario}"></span></td>-->
+			  <!-- <td><span th:text="${venta.usuario.username}"></span></td>-->
+            </tr>
+          </tbody>
+        </table>
+    </div>
+  </body>
+</html>

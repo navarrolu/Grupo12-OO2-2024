@@ -1,10 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title></title>
+    <title>STOCK - Productos</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
+<div class="container-index" >
+    <form style="overflow: auto;">
+        <a href="../index"
+        ><img src="../assets/caja.png" alt="insertar logo" class="logo"
+        /></a>
+        <h1>INFORMES</h1>
 
+        <div class="container-fluid" >
+            <a th:href="@{/producto/informes}" type="button"  class="btn btn-primary"> all </a>
+            <a th:href="@{/producto/informes/lowStock}" type="button"  class="btn btn-primary"> low stock </a>
+            <a th:href="@{/producto/informes/closeToLowStock}" type="button"  class="btn btn-primary"> close to low stock </a>
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th hidden >id</th>
+                <th>Nombre</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Stock Mínimo</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto : ${productos}"
+                th:class="${ producto.stock < producto.stock_minimo ? 'table-danger' : ''}"
+                <!--th:class="${ producto.stock <= result=producto.stock_minimo+20 ? 'table-warning' : ''}">-->
+                <!--<td><span th:text="${producto.id_producto}"></span></td> -->
+                <td><span th:text="${producto.descripcion}"></span></td>
+                <td><span th:text="${producto.precio_total}"></span></td>
+                <td><span th:text="${producto.stock}"></span></td>
+                <td><span th:text="${producto.stock_minimo}"></span></td>
+
+                <td>
+                    <a th:href ="@{/pedido/form}" class="btn btn-success">
+                        PEDIR
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
 </body>
 </html>

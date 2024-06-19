@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>STOCK - Nuevo Pedido</title>
+    <link rel="stylesheet" href="../css/styles2.css" />
+    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+  </head>
+  <body>
+    <div class="container container-index">
+      <form action="#" th:action="@{new}" th:object="${venta}" method="post">
+        <a href="../venta/compras" 
+          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
+        /></a> 
+        <h1>Nuevo Compra</h1>
+
+        <div class="lote-form-container">
+          <label for="producto">Producto:</label>
+          <p>
+            Producto:
+            <select class="lote-input" id="producto" name="producto" required>
+              <option value="">Seleccione un producto</option>
+              <th:block th:each="producto : ${productos}">
+                <option
+                  th:value="${producto.id_producto}"
+                  th:text="${producto.descripcion}"
+                ></option>
+              </th:block>
+            </select>
+          </p>
+
+          <p>
+            Cantidad:
+            <input
+              class="lote-input"
+              type="number"
+              step="1"
+              th:field="*{cantidad}"
+            />
+          </p>
+          <p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">
+            Cantidad error
+          </p>
+
+          <p>
+            Fecha: <input class="lote-input" type="date" th:field="*{fecha}" />
+          </p>
+          <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
+            Fecha error
+          </p>
+
+
+          <input class="product-button" type="submit" value="Realizar Compra" />
+
+          <div class="button-container-producto">
+            <button class="product-button">
+              <a href="../venta/compras">Volver a mis Compras</a>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
