@@ -15,7 +15,6 @@ import lombok.ToString;
 @ToString
 public class ProductoModel {
 	@Id
-	@Setter(AccessLevel.PROTECTED)
 	private Long id_producto;
 	@NotBlank
 	private String descripcion;

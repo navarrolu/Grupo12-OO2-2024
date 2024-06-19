@@ -1,5 +1,6 @@
 package com.unla.grupo12OO22024.controllers;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.unla.grupo12OO22024.entities.UserRole;
 import com.unla.grupo12OO22024.helpers.ViewRouteHelper;
 import com.unla.grupo12OO22024.services.implementation.UserService;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class UserController {
@@ -21,6 +23,7 @@ public class UserController {
     @Autowired
     @Qualifier("userService")
     private UserService userService;
+
 
     
     public UserController (UserService userService){
@@ -50,6 +53,7 @@ public class UserController {
     //(admin o user) para saber a que redireccionarlo (vista de compras o index)
     @GetMapping("/loginsuccess")
     public String loginCheck() {
+
         //capturo el context
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
@@ -65,10 +69,10 @@ public class UserController {
 
         //verifico si el rol de la entitie de user_role asignada al user es admin o user
         if (userRole.getRole().equalsIgnoreCase("ROLE_ADMIN")) {
-        
+
             return ViewRouteHelper.ROUTE_INDEX; // Redirecciona a la vista para administradores
         } else {
-            return  ViewRouteHelper.ROUTE_USER; // Redirecciona a la vista para usuarios regulares
+            return ViewRouteHelper.ROUTE_USER; // Redirecciona a la vista para usuarios regulares
         }
     }
 }

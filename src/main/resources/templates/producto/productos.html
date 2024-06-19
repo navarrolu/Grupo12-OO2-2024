@@ -35,10 +35,10 @@
               <td><span th:text="${producto.stock_minimo}"></span></td>
 
               <td>
-                <a th:href ="@{'delete/' + ${producto.id_producto} }" class="btn btn-success">
+                <a th:href="@{'delete/' + ${producto.id_producto} }" class="btn btn-success">
                   ELIMiNAR
                 </a>
-                <a th:href ="@{'edit/'+${producto.id_producto}}" class="btn btn-success">
+                <a th:href="@{'form/'+${producto.id_producto} }" class="btn btn-success">
                   EDITAR
                 </a>
               </td>
@@ -49,8 +49,6 @@
           <button class="product-button">
             <a href="../producto/form">Nuevo Producto</a>
           </button>
-          <button class="product-button">Editar Producto</button>
-          <!--<button class="product-button">Eliminar Producto</button>-->
         </div>
       </form>
     </div>

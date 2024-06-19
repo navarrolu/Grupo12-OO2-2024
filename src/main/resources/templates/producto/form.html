@@ -8,12 +8,17 @@
 </head>
 
 <body>
-	<div class="container container-index">
-		<form action="#" th:action="@{new}" th:object="${producto}" method="post">
+	<div class="container container-index" style="overflow:scroll;">
+		<form action="#" th:action="@{/producto/new}" th:object="${producto}" method="post">
 			<h1>Nuevo Producto</h1>
 			<a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
 
 			<div class="product-form-container">
+
+				<p hidden>
+					id:
+					<input type="number" th:field="*{id_producto}" class="product-input" />
+				</p>
 				<p>
 					Nombre:
 					<input type="text" th:field="*{descripcion}" class="product-input" />
@@ -56,7 +61,7 @@
 
 			<div class="button-container-producto">
 				<button class="product-button">
-					<a href="../producto/productos">Volver a Productos</a>
+					<a th:href="@{/producto/productos}">Volver a Productos</a>
 				</button>
 			</div>
 
