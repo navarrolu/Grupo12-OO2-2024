@@ -17,6 +17,7 @@
             <tr>
               <th>ID Pedido</th>
               <th>Cantidad</th>
+			  <th>Total</th>
               <th>Fecha</th>
               <th>Proveedor</th>
               <th>Producto</th>
@@ -26,6 +27,7 @@
             <tr th:each="pedido : ${pedidos}">
               <td><span th:text="${pedido.id_pedido}"></span></td>
               <td><span th:text="${pedido.cantidad}"></span></td>
+			  <td><span th:text="${pedido.total}"></span></td>
               <td>
                 <span
                   th:text="${#temporals.format(pedido.fecha, 'dd/MM/yyyy')}"

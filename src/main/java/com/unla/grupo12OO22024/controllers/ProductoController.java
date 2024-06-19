@@ -64,6 +64,7 @@ public class ProductoController {
 		mV.setViewName(ViewRouteHelper.PRODUCTO_NEW);
 		return mV;
 	}
+    
 
     @GetMapping ("/delete/{id_producto}")
     public RedirectView removeProducto( @PathVariable Long id_producto){

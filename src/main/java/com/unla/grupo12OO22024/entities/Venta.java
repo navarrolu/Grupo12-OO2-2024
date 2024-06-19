@@ -14,11 +14,13 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@Entity
-@Getter
-@Setter
-@NoArgsConstructor
+@Entity // se mapea a una tabla en la base de datos
+@Getter // Genera automaticamente los metodos getter de la clase
+@Setter // Genera automaticamente los metodos setter de la clase
+@ToString // Genera automaticamente el metodo toString de la clase
+@NoArgsConstructor // Genera automáticamente un constructor sin argumentos
 @Table(name = "venta")
 public class Venta {
 
@@ -31,8 +33,9 @@ public class Venta {
 	@JoinColumn(name = "id_producto")
 	private Producto producto;
 
-	@Column(name = "id_usuario", nullable = false)
-	private int usuario;
+	@ManyToOne
+	@JoinColumn(name = "id_usuario")
+	private User usuario;
 	
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
@@ -41,8 +44,7 @@ public class Venta {
 	private float total;
 	
 	@Column(name = "fecha", nullable = false)
-	private LocalDate fecha;
-	
+	private LocalDate fecha;	
 	
 	// Antes de que una nueva instancia de la entidad se inserte en la base de datos, 
 	// JPA llamará automáticamente a cualquier método anotado con @PrePersist

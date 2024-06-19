@@ -35,7 +35,7 @@ public class SecurityConfiguration {
 				.csrf(AbstractHttpConfigurer::disable)
 				.cors(AbstractHttpConfigurer::disable)
 				.authorizeHttpRequests(auth -> {
-					auth.requestMatchers("/css/**", "/js/**", "/assets/*", "/webjars/**", "/assets/**", "/static/", "/static/*", "/js/*", "/register",
+					auth.requestMatchers("/css/**", "/assets/*", "/webjars/**", "/assets/**", "/static/", "/static/*", "/register",
 							"/register/*", "/resources/**", "/css/*", "/js/**", "/css/*").permitAll(); // Agregar "/register" aquí
 					auth.anyRequest().authenticated();
 				})
@@ -68,6 +68,9 @@ public class SecurityConfiguration {
 		return provider;
 	}
 
+	//Lucia:
+	//metodo que eencripta la contraseña al momento de registrarse 
+	//antes de guardarla en la base de datos. es llamdada userService
 	@Bean
 	PasswordEncoder passwordEncoder(){
 		return new BCryptPasswordEncoder();

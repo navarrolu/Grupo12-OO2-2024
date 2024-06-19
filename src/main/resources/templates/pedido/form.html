@@ -1,70 +1,90 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-  <head>
-    <title>STOCK - Nuevo Pedido</title>
-    <link rel="stylesheet" href="./css/styles2.css" />
-    <link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
-  </head>
-  <body>
-    <div class="container container-index">
-      <form action="#" th:action="@{new}" th:object="${pedido}" method="post">
-        <a href="../index"
-          ><img src="../assets/caja.png" alt="insertar logo" class="logo"
-        /></a>
-        <h1>Nuevo Pedido</h1>
+<head>
+	<title>STOCK - Nuevo Pedido</title>
+	<link rel="stylesheet" href="../css/styles2.css" />
+	<link rel="icon" href="../assets/stock.ico" type="image/x-icon" />
+	<script>
+		// Funcion para actualizar el total
+		function updateTotal() {
+			var productoSelect = document.getElementById("producto");
+			var selectedOption = productoSelect.options[productoSelect.selectedIndex];
+			var precioBase = selectedOption.getAttribute("data-precio");
+			var cantidad = document.getElementById("cantidad").value;
 
-        <div class="lote-form-container">
-          <label for="producto">Producto:</label>
-          <p>
-            Producto:
-            <select class="lote-input" id="producto" name="producto" required>
-              <option value="">Seleccione un producto</option>
-              <th:block th:each="producto : ${productos}">
-                <option
-                  th:value="${producto.id_producto}"
-                  th:text="${producto.descripcion}"
-                ></option>
-              </th:block>
-            </select>
-          </p>
+			// Calcular el total
+			var total = 0;
+			if (precioBase && cantidad) {
+				total = parseFloat(precioBase) * parseInt(cantidad);
+			}
 
-          <p>
-            Cantidad:
-            <input
-              class="lote-input"
-              type="number"
-              step="1"
-              th:field="*{cantidad}"
-            />
-          </p>
-          <p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">
-            Cantidad error
-          </p>
+			// Mostrar el total
+			document.getElementById("totalDisplay").innerText = "Total: " + total.toFixed(2);
+		}
+		// 1- Obtiene la opción seleccionada: Encuentra el elemento seleccionado del "<select>".
+		// 2- Extrae el precio base: Toma el valor del atributo data-precio de la opción seleccionada.
+		// 3- Obtiene la cantidad ingresada: Recupera el valor ingresado en el campo de cantidad.
+		// 4- Calcula el total: Multiplica el precio base por la cantidad.
+		// 5- Muestra el total: Actualiza el texto del elemento que muestra el total.
+	</script>
 
-          <p>
-            Fecha: <input class="lote-input" type="date" th:field="*{fecha}" />
-          </p>
-          <p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
-            Fecha error
-          </p>
+</head>
+ 
+<body>
+	<div class="container container-index">
+		<form action="#" th:action="@{new}" th:object="${pedido}" method="post">
+			<a href="../index"><img src="../assets/caja.png" alt="insertar logo" class="logo" /></a>
+			<h1>Nuevo Pedido</h1>
 
-          <p>
-            Proveedor:
-            <input class="lote-input" type="text" th:field="*{proveedor}" />
-          </p>
-          <p th:if="${#fields.hasErrors('proveedor')}" th:errors="*{proveedor}">
-            Proveedor error
-          </p>
+			<div class="lote-form-container">
+				<label for="producto">Producto:</label>
+				<p>
+					Producto:
+					<select class="lote-input" id="producto" name="producto" required onchange="updateTotal()">
+						<option value="">Seleccione un producto</option>
+						<th:block th:each="producto : ${productos}">
+							<option th:value="${producto.id_producto}" th:text="${producto.descripcion}"
+								th:data-precio="${producto.precio_base}"></option>
+						</th:block>
+					</select>
+				</p>
 
-          <input class="product-button" type="submit" value="Enviar Pedido" />
+				<p>
+					Cantidad:
+					<input class="lote-input" type="number" step="1" id="cantidad" th:field="*{cantidad}"
+						oninput="updateTotal()" />
+				</p>
+				<p th:if="${#fields.hasErrors('cantidad')}" th:errors="*{cantidad}">
+					Cantidad error
+				</p>
 
-          <div class="button-container-producto">
-            <button class="product-button">
-              <a href="../pedido/pedidos">Volver a Pedidos</a>
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </body>
+				<p id="totalDisplay">Total: 0.00</p>
+
+				<p>
+					Fecha: <input class="lote-input" type="date" th:field="*{fecha}" />
+				</p>
+				<p th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}">
+					Fecha error
+				</p>
+
+				<p>
+					Proveedor:
+					<input class="lote-input" type="text" th:field="*{proveedor}" />
+				</p>
+				<p th:if="${#fields.hasErrors('proveedor')}" th:errors="*{proveedor}">
+					Proveedor error
+				</p>
+
+				<input class="product-button" type="submit" value="Enviar Pedido" />
+
+				<div class="button-container-producto">
+					<button class="product-button">
+						<a href="../pedido/pedidos">Volver a Pedidos</a>
+					</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</body>
+
 </html>

@@ -10,15 +10,12 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
-
-
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "user")
@@ -29,9 +26,11 @@ public class User {
     @Column(name = "id_usuario")
     private Long id;
 
+    @NotEmpty(message = "El nombre de usuario es obligatorio")
     @Column(name = "username", unique = true, nullable = false, length = 45)
     private String username;
 
+    @NotEmpty(message = "La contraseña es obligatoria")
     @Column(name = "password", nullable = false, length = 60)
     private String password;
 
@@ -46,7 +45,7 @@ public class User {
     @UpdateTimestamp
     private LocalDateTime updateAt;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @OneToMany(mappedBy = "user")
     private Set<UserRole> userRoles = new HashSet<UserRole>();
 
 
@@ -62,8 +61,6 @@ public class User {
 
     public User() {
     }
-    
-
 
     public Long getId() {
         return this.id;

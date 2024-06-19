@@ -16,10 +16,7 @@
           <thead>
             <tr>
               <th>ID Lote</th>
-              <th>Cantidad</th>
               <th>Fecha de Recepción</th>
-              <th>Proveedor</th>
-              <th>Precio</th>
               <th>Nro. Pedido</th>
               <th>Nombre del Producto</th>
             </tr>
@@ -27,16 +24,13 @@
           <tbody>
             <tr th:each="lote : ${lotes}">
               <td><span th:text="${lote.id_lote}"></span></td>
-              <td><span th:text="${lote.cantidad}"></span></td>
               <td>
                 <span
                   th:text="${#temporals.format(lote.fecha_recepcion, 'dd/MM/yyyy')}"
                 ></span>
               </td>
-              <td><span th:text="${lote.proveedor}"></span></td>
-              <td><span th:text="${lote.precio}"></span></td>
               <td><span th:text="${lote.pedido.id_pedido}"></span></td>
-              <td><span th:text="${lote.producto.descripcion}"></span></td>
+              <td><span th:text="${lote.pedido.producto.descripcion}"></span></td>
             </tr>
           </tbody>
         </table>

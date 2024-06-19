@@ -4,12 +4,11 @@ import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -17,25 +16,33 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;;
 
-@Entity
-@Getter
-@Setter
-@ToString
-@NoArgsConstructor
+@Entity // se mapea a una tabla en la base de datos
+@Getter // Genera automaticamente los metodos getter de la clase
+@Setter // Genera automaticamente los metodos setter de la clase
+@ToString // Genera automaticamente el metodo toString de la clase
+@NoArgsConstructor // Genera automáticamente un constructor sin argumentos
 @Table(name = "pedido")
 public class Pedido {
+
+	// Rocio
+	/*
+	 * Mapeo con tablas de la base de datos
+	 */
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Setter(AccessLevel.PROTECTED)
-	private int id_pedido;
+	private Long id_pedido;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_producto", nullable = false)
+	@OneToOne
+    @JoinColumn(name = "id_producto", nullable = false)
 	private Producto producto;
 
 	@Column(name = "cantidad", nullable = false)
 	private int cantidad;
+
+	@Column(name = "total", nullable = false)
+	private float total;
 
 	@Column(name = "fecha", nullable = false)
 	private LocalDate fecha;

@@ -2,9 +2,7 @@ package com.unla.grupo12OO22024.controllers;
 
 import java.util.List;
 
-//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Qualifier;
-//import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,7 +21,6 @@ import com.unla.grupo12OO22024.services.implementation.ProductoService;
 import jakarta.validation.Valid;
 
 @Controller
-//@PreAuthorize("hasRole('ROLE_ADMIN')")
 @RequestMapping("/pedido")
 public class PedidoController {
 
@@ -33,13 +30,19 @@ public class PedidoController {
 	@Qualifier("productoService")
 	private ProductoService productoService;
 
-	// private ModelMapper modelMapper = new ModelMapper();
-
+	// Constructor que recibe las instancias de PedidoService y ProductoService
 	public PedidoController(PedidoService pedidoService, ProductoService productoService) {
 		this.pedidoService = pedidoService;
 		this.productoService = productoService;
 	}
 
+	// Rocio:
+	/*
+	 * Método GET para mostrar la vista de índice de pedidos
+	 * 
+	 * Dentro de este metodo se agregan la lista de pedidos y un nuevo objeto
+	 * PedidoModel al modelo,
+	 */
 	@GetMapping("/pedidos")
 	public ModelAndView index() {
 		ModelAndView mAV = new ModelAndView(ViewRouteHelper.PEDIDO_INDEX);
@@ -48,6 +51,14 @@ public class PedidoController {
 		return mAV;
 	}
 
+	// Rocio:
+	/*
+	 * Método GET para mostrar el formulario de pedido
+	 * 
+	 * En este metodo se obtiene una lista de Productos, la cual se agrega al modelo
+	 * al igual que un nuevo objeto PedidoModel y retorna la ruta de la vista del
+	 * formulario de pedido.
+	 */
 	@GetMapping("/form")
 	public String pedido(Model model) {
 		List<Producto> productos = productoService.getAll();
@@ -56,17 +67,28 @@ public class PedidoController {
 		return ViewRouteHelper.PEDIDO_FORM;
 	}
 
+	// Rocio
+	/*
+	 * Método POST para crear un nuevo pedido
+	 * 
+	 * Se verifica si hay errores en la validacion, en caso de que haya errores, se
+	 * setea la vista del formulario de pedido.
+	 * 
+	 * En caso de estar correcto, inserta el pedido en la base de datos, agrega la
+	 * lista actualizada de pedidos y un nuevo objeto PedidoModel al modelo y por
+	 * ultimo redirige a la vista de indice de pedidos
+	 *
+	 */
 	@PostMapping("/new")
 	public ModelAndView newpedido(@Valid @ModelAttribute("pedido") PedidoModel pedido, BindingResult bindingResult) {
 		ModelAndView mV = new ModelAndView();
 		if (bindingResult.hasErrors()) {
 			mV.setViewName(ViewRouteHelper.PEDIDO_FORM);
 		} else {
-			pedidoService.insertOrUpdate(pedido);
+			pedidoService.insertPedido(pedido);
 			mV.addObject("pedidos", pedidoService.getAll());
 			mV.addObject("pedido", new PedidoModel());
 			mV.setViewName(ViewRouteHelper.PEDIDO_INDEX);
-
 		}
 		return mV;
 	}

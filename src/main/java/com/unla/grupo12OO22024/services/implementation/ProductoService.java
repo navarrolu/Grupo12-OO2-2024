@@ -15,38 +15,40 @@ import com.unla.grupo12OO22024.services.IProductoService;
 @Service("productoService")
 public class ProductoService implements IProductoService {
 
-    @Autowired
-    @Qualifier("productoRepository")
-    private IProductoRepository productoRepository;
+	@Autowired
+	@Qualifier("productoRepository")
+	private IProductoRepository productoRepository;
 
-    private ModelMapper modelMapper = new ModelMapper();
+	private ModelMapper modelMapper = new ModelMapper();
 
+	@Override
+	public List<Producto> getAll() {
+		return productoRepository.findAll();
+	}
 
-    @Override
-    public List<Producto> getAll() {
-        return productoRepository.findAll();
-    }
+	@Override
+	public ProductoModel insertOrUpdate(ProductoModel productoModel) {
+		// Setteo de precio total
+		productoModel.setPrecio_total(productoModel.getPrecio_base() * 1.25f);
 
-    @Override
-    public ProductoModel insertOrUpdate(ProductoModel productoModel) {
-        Producto producto = productoRepository.save( modelMapper.map(productoModel, Producto.class));
-        return modelMapper.map(producto, ProductoModel.class);
-    }
+		Producto producto = productoRepository.save(modelMapper.map(productoModel, Producto.class));
+		return modelMapper.map(producto, ProductoModel.class);
+	}
 
-    public ProductoModel getById ( long id ){
-        Producto producto = productoRepository.getReferenceById(id);
-        return  modelMapper.map(producto, ProductoModel.class);
-    }
+	public ProductoModel getById(long id) {
+		Producto producto = productoRepository.getReferenceById(id);
+		return modelMapper.map(producto, ProductoModel.class);
+	}
 
-    @Override
-    public boolean remove(long id) {
-        try {
-            productoRepository.deleteById(id);
-            return  true;
-        } catch ( Exception e){
-            return false;
-        }
-    }
+	@Override
+	public boolean remove(long id) {
+		try {
+			productoRepository.deleteById(id);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 
     @Override
     public List<Producto> findAllLowStock() {
