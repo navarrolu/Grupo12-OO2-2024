@@ -15,12 +15,12 @@ public interface IProductoRepository extends JpaRepository<Producto, Serializabl
     //@Query("SELECT p FROM Producto p WHERE p.descripcion = :descripcion")
     public abstract Producto findByDescripcion ( String descripcion );
 
-    @Query("from Producto p where p.stock <= p.stock_minimo")
+    @Query("from Producto p where p.stock < p.stock_minimo")
     public abstract List<Producto> findAllLowStock();
 
     //Maximiliano
     //query trae todos los productos de la DB cu stock este por encima de las
     // 20 unidaddes de su stock minimo
-    @Query("from Producto p where p.stock = (p.stock_minimo+20)")
+    @Query("from Producto p where p.stock > p.stock_minimo and p.stock < p.stock_minimo+20")
     public abstract List<Producto> findAllCloseToLowStock();
 }
